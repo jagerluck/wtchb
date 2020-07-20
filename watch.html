@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch</title>
+  <style id="clock-animations"></style>
+  <link rel="stylesheet" href="watch.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="app-frames">
+    </div>
+
+    <div class="change-watch-opt">
+      <div class="time-now">
+        <button class="change-clock top-border" onclick="createFrame('time')">Time now</button>
+      </div>
+      <div class="watch-opt-rotate" id="stopwatch">
+        <div class="stopwatch__front">
+          <button class="change-clock" onclick="createFrame('stopwatch')">Stopwatch</button>
+        </div>
+        <div class="stopwatch__top"></div>
+        <div class="stopwatch__bottom"></div>
+        <div class="stopwatch__back">
+          <button class="btn-stop-stopwatch">Stop</button>
+          <button class="btn-start-stopwatch">Start</button>
+          <button class="btn-start-stopwatch">Cancel</button>
+        </div>
+      </div>
+      <div class="watch-opt-rotate" id="timer-watch">
+        <div class="timer__front">
+          <button class="change-clock" onclick="createFrame('timer')">Timer</button>
+        </div>
+        <div class="timer__top"></div>
+        <div class="timer__bottom"></div>
+        <div class="timer__back">
+          <button class="btn-stop-timer">Stop</button>
+          <button class="btn-start-timer">Start</button>
+          <button class="btn-start-timer">Cancel</button>
+        </div>
+      </div>
+      <div class="calendar"><button class="change-clock bottom-border" onclick="createFrame('calendar')">Calendar</button></div>
+    </div>
+  </div>
+  
+  <script type="text/javascript" src="./js/Frames.js"></script>
+  <script type="text/javascript" src="./js/setupMenu.js"></script>
+  <script type="text/javascript" src="./js/createFrame.js"></script>
+
+</body>
+</html>

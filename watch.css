@@ -1,0 +1,457 @@
+:root {
+  --scale-color:rgb(92, 92, 92);
+  --big-delimeter-color: rgb(168, 168, 168);
+  --hour-hand: linear-gradient(rgb(109, 85, 85), rgb(77, 50, 50));
+  --minute-hand: rgb(168, 129, 129);
+  --sec-hand: rgb(255, 46, 46);
+  --spring-color: linear-gradient(rgb(147, 80, 80), rgb(73, 28, 28));
+  --clock-w-h: 360px;
+  --clock-w-h-inner: 330px;
+  --calendar-w-h: 400px;
+  --main-color: #102323;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  background-color: var(--main-color);
+}
+
+.app-container {
+  display: flex;
+  margin: 2rem;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  min-height: 100vh;
+}
+
+.app-frames {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.clock-frame {
+  margin: 2rem;
+  display: flex;
+  box-sizing: border-box;
+  position: absolute;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  min-width: var(--clock-w-h);
+  min-height: var(--clock-w-h);
+  border: 4px solid #102020;
+  box-shadow: 0 -15px 15px rgba(255,255,255, .05),
+              inset 0 -15px 15px rgba(255,255,255, .05),
+              0 15px 15px rgba(0,0,0, .3),
+              inset 0 15px 15px rgba(0,0,0, .3);
+  transition: all .5s linear;
+}
+
+.scale-container {
+  position: absolute;
+  border-radius: 50%;
+  width: var(--clock-w-h-inner);
+  height: var(--clock-w-h-inner);
+  /* in order to see watch circle scale basis */
+  /* border: solid 1px rgba(245, 245, 245, 0.312); */
+  z-index: 10;
+} 
+
+.scale-delimeters {
+  max-width: 0;
+  max-height: 0;
+  top: 0;
+  left: 0;
+  position: relative;
+  width: inherit;
+  height: inherit;
+  opacity: 1;
+  z-index: 11;
+}
+
+.scale-delimeters span {
+  position: absolute;
+  opacity: 1;
+  width: 1px;
+  transform-origin: top;
+  height: 6px;
+  background-color: var(--scale-color);
+}
+
+.scale-delimeters .big-scale {
+  height: 15px;
+  margin-left: -1px;
+  width: 2px;
+  background-color: var(--big-delimeter-color);
+}
+
+.clock-movement {
+  all: unset;
+  top: -100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  min-width: var(--clock-w-h-inner);
+  min-height: var(--clock-w-h-inner);
+  max-width: var(--clock-w-h-inner);
+  max-height: var(--clock-w-h-inner);
+}
+
+.clock-frame .hour,
+.clock-frame .minute,
+.clock-frame .second {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0);
+  position: absolute;
+}
+
+.clock-frame .hour {
+  width: 160px;
+  height: 160px;
+  z-index: 11;
+}
+
+.clock-frame .minute {
+  width: 220px;
+  height: 220px;
+  z-index: 12;
+}
+
+.clock-frame .second {
+  width: 280px;
+  height: 280px;
+  z-index: 13;
+}
+
+.central-spring {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -6px;
+  width: 12px;
+  height: 12px;
+  z-index: 20;
+  background: var(--spring-color);
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px rgb(24, 24, 24);
+}
+
+.central-spring::after {
+  content: '';
+  position: absolute;
+  background-color: rgb(123, 123, 123);
+  z-index: 20;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  box-shadow: -1px -1px 3px white;
+  margin: auto;
+}
+
+.hour .hr {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 8px;
+  height: 80px;
+  border-radius: 6px;
+  background: var(--hour-hand);
+  animation: 43200s linear movehourhands infinite;
+  box-shadow: 1px 2px 9px rgb(31, 31, 31);
+}
+
+.hour .hr::after {
+  content: '';
+  bottom: 0;
+  width: 2px;
+  height: 70px;
+  background: linear-gradient(rgb(185, 131, 131), rgb(111, 51, 51));
+}
+
+.minute .mn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 4px;
+  height: 110px;
+  border-radius: 4px;
+  background: var(--minute-hand);
+  animation: 3600s linear moveminhands infinite;
+}
+
+.minute .mn::after {
+  content: '';
+  bottom: 0;
+  width: 1px;
+  height: 95px;
+  background: rgb(255, 255, 255);
+}
+
+.second .sc {
+  width: 1px;
+  height: 140px;
+  background-color: var(--sec-hand);
+  animation: 60s linear movesechands infinite;
+}
+
+.clock-frame .hr, 
+.clock-frame .mn, 
+.clock-frame .sc {
+  transform-origin: bottom;
+}
+
+.layout {
+  all: unset;
+  display: flex;
+  position: relative;
+  margin: auto;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: var(--clock-w-h-inner);
+  height: var(--clock-w-h-inner);
+  color: whitesmoke;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+.clock-number-12,
+.clock-number-3,
+.clock-number-9,
+.clock-number-6 {
+  all: unset;
+  position: absolute;
+  z-index: 11;
+  box-sizing: content-box;
+}
+
+
+.clock-number-3,
+.clock-number-9 {
+  padding: 0 2rem .5rem 2rem;
+}
+
+.clock-number-6 { padding: 1.5rem }
+.clock-number-12 { padding: 1.25rem }
+
+.clock-number-12,
+.clock-number-3,
+.clock-number-6,
+.clock-number-9 {
+  font-family: Cochin, Georgia;
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+.clock-number-12 {
+  top: 0;
+}
+.clock-number-3 {
+  right: 0;
+}
+.clock-number-6 {
+  bottom: 0;
+}
+.clock-number-9 {
+  left: 0;
+}
+
+.change-watch-opt {
+  display: flex;
+  position: relative;
+  border-radius: 1rem;
+  margin: 2rem 2rem 1rem 1rem;
+  width: 400px;
+  box-sizing: border-box;
+  flex-flow: row wrap;
+  border: solid 4px rgb(43, 41, 41);
+
+  box-shadow: 0 -5px 15px rgba(255, 255, 255, 0.125),
+              0 -25px 15px rgba(255, 255, 255, 0.055),
+              10px 5px 50px rgba(0, 0, 0, 0.403),
+              5px 10px 25px rgb(0, 0, 0);
+}
+
+.change-watch-opt div {
+  min-width: 390px;
+  margin: .3rem 0;
+  height: 3rem;
+  color: aliceblue;
+  position: relative;
+  vertical-align: middle;
+  transform-origin: center;
+  text-align: center;
+}
+
+.change-watch-opt div:first-of-type {
+  margin-top: 0 !important;
+}
+
+
+.change-watch-opt .top-border { border-radius: 1rem 1rem 0 0; }
+.change-watch-opt .bottom-border { border-radius: 0 0 1rem 1rem; }
+
+.change-watch-opt div {
+  position: relative;
+  display: flex;
+  transform-style: preserve-3d;
+  background-color: unset;
+  transition: all .5s ease-in;
+}
+
+.change-watch-opt div div {
+  flex: 0 1 auto;
+  display: flex;
+  margin: 0;
+  position: absolute;
+  border-radius: 0% 0% 0% 0% !important;
+}
+
+.change-watch-opt div div:nth-of-type(1) {
+  transform: rotateX(0deg) translateZ(1.5rem);  
+}
+
+.change-watch-opt div div:nth-of-type(2) {
+  transform: rotateX(90deg) translateZ(1.5rem);
+  background: linear-gradient(var(--main-color) 99%, rgb(29, 38, 39) 1%);
+}
+
+.change-watch-opt div div:nth-of-type(3) {
+  transform: rotateX(-90deg) translateZ(1.5rem);
+  /* background-color: rgb(53, 0, 214); */
+}
+
+.change-watch-opt div div:nth-of-type(4) {
+  transform: rotateX(180deg) translateZ(1.5rem);  
+}
+
+.watch-opt-rotate.rotated {
+  transform: rotateX(-180deg);
+  transition: all .5s ease-in;
+}
+
+.change-watch-opt div button {
+  all: unset;
+  flex: 1 1 auto;
+  display: block;
+  height: 100%;
+  border-top: 1px solid rgb(48, 48, 48);
+  color: whitesmoke;
+  background: linear-gradient(rgb(29, 38, 39) 1%, var(--main-color) 99%);
+  margin: auto;
+  width: 100%;
+}
+
+.change-watch-opt div button:hover {
+  cursor: pointer;
+  color: brown;
+}
+
+.change-watch-opt div button:active {
+  box-shadow: inset 0 1px 3px rgb(212, 22, 22);
+  /* transition: all .5s linear; */
+}
+
+
+/***************CALENDAR****************/
+
+.calendar-frame {
+  margin: 1rem;
+  display: flex;
+  position: absolute;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  width: var(--clock-w-h);
+  height: var(--clock-w-h);
+  border: 4px solid #102020;
+  color: beige;
+  box-shadow: 0 -15px 15px rgba(255,255,255, .05),
+              inset 0 -15px 15px rgba(255,255,255, .05),
+              0 15px 15px rgba(0,0,0, .3),
+              inset 0 15px 15px rgba(0,0,0, .3);
+  transition: all .5s linear;
+}
+
+.calendar-frame.show {
+  display: flex;
+}
+
+.calendar-frame li {
+  all: unset;
+}
+
+.calendar__title-field {
+  flex: 1 0 100%;
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+  padding-top: 2rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  
+}
+
+/* Arrows, half past 0 and I realized that it needs to be js to be able to click that shit... */
+.calendar__title-field::before {
+   background-image: url('./js/elements/arrow.svg');
+   background-size: contain;
+   background-repeat: no-repeat;
+   padding: 1.5rem .75rem .25rem .75rem;
+   margin: .5rem 1rem;
+   color: aliceblue;
+   filter: brightness(2);
+   transform: scale(1.5);
+   content: "";
+   cursor: pointer;
+}
+.calendar__title-field::after {
+   background-image: url('./js/elements/arrow.svg');
+   background-size: contain;
+   background-repeat: no-repeat;
+   transform: scale(1.5) rotate(180deg);
+   filter: brightness(2);
+   padding: 1.5rem .75rem .25rem .75rem;
+   margin: .5rem 1rem;
+   content: "";
+   cursor: pointer;
+}
+
+.calendar__date-field {
+  height: 200px;
+  text-align: center;
+}
+
+.calendar__date-field .weekdays {
+  width: 350px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.calendar__date-field .weekdays li {
+  flex: 1 1 50px;
+  margin: .2rem;
+}
+
+
+.calendar__date-field .days {
+  display: flex;
+  width: 350px;
+  flex-flow: row wrap;
+}
+
+.calendar__date-field .days li {
+  flex: 0 0 50px;
+  margin: .2rem 0;
+}

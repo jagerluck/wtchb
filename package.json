@@ -1,0 +1,21 @@
+{
+   "name": "watch-black",
+   "description": "typical watch app with some additions",
+   "version": "0.0.1",
+   "private": true,
+   "author": "RZ",
+   "scripts": {
+      "start": ""
+   },
+   "dependencies": {},
+   "devDependencies": {
+      "webpack": "^4.43.0",
+      "webpack-cli": "^3.3.12"
+   },
+   "licenses": [
+      {
+         "type": "MIT",
+         "url": "http://opensource.org/licenses/MIT"
+      }
+   ]
+}
