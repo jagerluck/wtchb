@@ -18,9 +18,7 @@ opt_to_rotate.forEach((el) => {
   })
 });
 
-
 // add animation to options container.
-
 let btnOptions = document.querySelectorAll(['.stopwatch__back button', '.timer__back button']);
 btnOptions.forEach((el) => el.addEventListener('click', (e) => {
   if(e.target.textContent !== 'Cancel') return e.stopPropagation();

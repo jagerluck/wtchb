@@ -1,6 +1,6 @@
 // ------------------------------ Frame Factory to extend
 class FrameFactory {
-  parent_frame = document.querySelector('.app-frames')
+   parent_frame = document.createElement('div', this.className = 'app-frames')
   
   setup() {
     throw new Error("Method 'setup()' must be implemented.");
@@ -8,18 +8,18 @@ class FrameFactory {
 
   // if it'd be required to add more frames at once - change the logic so parent_frame could contain more frames instead of one
   addFrame(frame) {
-    if (this.parent_frame.hasChildNodes()) {
-      this.parent_frame.removeChild(this.parent_frame.lastChild)
-    }
-    this.parent_frame.append(frame)
-  }
-
+      if (this.parent_frame.className !== 'app-frames') this.parent_frame.className = 'app-frames'
+      if (this.parent_frame.hasChildNodes()) {
+         this.parent_frame.removeChild(this.parent_frame.lastChild)
+      }
+      this.parent_frame.append(frame)
+   }
 }
-// X ------------------------------ Frame Factory to extend
+// X ------------------------------ Frame Factory -end-
 
 
 // ------------------------------ Time Frame
-class Time_Frame extends FrameFactory {
+export class Time_Frame extends FrameFactory {
   constructor(delimeter_prop) {
     super(parent)
     this.setup(delimeter_prop)
@@ -125,7 +125,6 @@ class Time_Frame extends FrameFactory {
   }
 
   setup(delimeter_prop) {
-    if (settings_state.btnRotated) return alert('fuck off')
     this.create(delimeter_prop | 2, 180, 0, -165, 165)
     this.currentTime()
   }
@@ -135,12 +134,12 @@ class Time_Frame extends FrameFactory {
 
 // ------------------------------ Calendar Frame
 
-class Calendar_Frame extends FrameFactory {
+export class Calendar_Frame extends FrameFactory {
   constructor() {
     super(parent)
     this.setup()
   }
-  
+
   setUpCalendar() {
     let date = new Date();
     let month = date.getMonth();
@@ -194,7 +193,7 @@ class Calendar_Frame extends FrameFactory {
 
 // ------------------------------ Stopwatch Frame
 
-class Stopwatch_Frame extends FrameFactory {
+export class Stopwatch_Frame extends FrameFactory {
   constructor() {
     super(parent)
     this.setup()

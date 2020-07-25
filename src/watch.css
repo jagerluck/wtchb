@@ -405,7 +405,7 @@
 
 /* Arrows, half past 0 and I realized that it needs to be js to be able to click that shit... */
 .calendar__title-field::before {
-   background-image: url('./js/elements/arrow.svg');
+   background-image: url("./pics/arrow.svg");
    background-size: contain;
    background-repeat: no-repeat;
    padding: 1.5rem .75rem .25rem .75rem;
@@ -417,7 +417,7 @@
    cursor: pointer;
 }
 .calendar__title-field::after {
-   background-image: url('./js/elements/arrow.svg');
+   background-image: url("./pics/arrow.svg");
    background-size: contain;
    background-repeat: no-repeat;
    transform: scale(1.5) rotate(180deg);
