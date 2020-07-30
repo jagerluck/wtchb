@@ -1,4 +1,4 @@
-import { RotatingOption } from './RotatingOption.js'
+import RotatingOption from './RotatingOption.js'
 import React from 'react'
 
 

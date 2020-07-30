@@ -1,22 +1,34 @@
-import React from 'react';
-import { WatchMenu } from './components/Menu/WatchMenu.js';
-import './watch.css'
-
-// const ThemeContext = React.createContext('light');
-
-export function App() {
+import React from 'react'
+import { connect } from 'react-redux'
+import { WatchMenu } from './components/Menu/WatchMenu.js'
+import './style.css'
 
 
+
+function App(props) { 
    return (
-   // to provide theme option for other components
-   // TODO do I need to pass watch state or keep it in local state of the component
-   // <ThemeContext.Provider value="dark">
       <div className="app-container" theme="dark">
-         <div className="app-frames">
-            {store}
-         </div>
+         {props.state}
          <WatchMenu />
       </div>
-   // </ThemeContext.Provider>
    )
 }
+
+
+
+function mapStateToProps(state) {
+   console.log(state)
+   return { state }
+}
+
+
+
+export default connect(
+   null,
+   mapStateToProps
+)(App)
+
+// need to wrap the hole container into connect function like so:
+// connect(mapState)(Component)
+// mapDispatchToProps or this instead of mapState idk 
+// probably write as it implemented in example

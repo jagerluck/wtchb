@@ -1,17 +1,18 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import { App } from './App.js'
+import App from './App.js'
 import { Provider } from 'react-redux'
-// import { store } from './redux/store.js'
+import { createStore } from 'redux'
+import frameReducer from './redux/reducers/frameReducer.js'
 
 
-
-const reactRoot = document.getElementById("react-root")
+const store = createStore(frameReducer)
+const reactRoot = document.getElementById('react-root')
 
 
 ReactDOM.render(
    <Provider store={store}>
-      <App />
+      <App/>
    </Provider>,
    reactRoot
 )

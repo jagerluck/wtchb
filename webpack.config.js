@@ -1,4 +1,5 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
          },
          {
             test:/\.css$/,
-            use: ['css-loader']
+            use: ['style-loader', 'css-loader']
          },
          {
             test: /\.(png|jpg|gif|svg)$/i,
@@ -29,6 +30,14 @@ module.exports = {
          }
       ]
    },
+   plugins: [
+      new MiniCssExtractPlugin({
+         filename: './src/style.css',
+      }),
+      new HtmlWebPackPlugin({
+         template: './src/index.html',
+      }),
+   ],
    devtool: 'cheap-module-eval-source-map',
    devServer: {
       contentBase: path.join(__dirname, 'dist')
@@ -39,10 +48,14 @@ module.exports = {
 
 
 
+/* NOTES
 
-// plugins: [
-//    new HtmlWebPackPlugin({
-//       template: "./src/index.html",
-//       filename: "./index.html"
-//    })
-// ]
+* Webpack goes bottom-up when compiles loaders within a rule, so be careful to provide the right order
+
+* plugins for proper build with html css and combine altogether with js into single bundle(js) file
+
+minicssextractplugin - to reduce the size of a css bundle 
+
+
+
+*/
