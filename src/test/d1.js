@@ -39,12 +39,6 @@ const j = new Doo()
 
 console.log(j.jj())
 
-const arrr = [-2, 4, 89, 1]
-
-
-
-console.log(arrr);
-
 
 // make an array of arguments ES5
 function pam() {

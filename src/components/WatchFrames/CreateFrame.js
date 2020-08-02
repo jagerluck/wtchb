@@ -1,11 +1,10 @@
-import { Time_Frame } from './frames/Time.js'
+import { Time_Frame } from './frames/Time_Frame.js'
 
 
-export function CreateFrame(factory) {
-
-   switch(factory) {
+export function CreateFrame(frame) {
+   switch (frame) {
       case('TIME'):
-         return Time_Frame();
+         return Time_Frame()
       // case('CALENDAR'):
       //    return Calendar_Frame();
       // case('STOPWATCH'):
@@ -13,7 +12,7 @@ export function CreateFrame(factory) {
       // case('timer'):
       //    return new Timer_Frame();
       default:
-         return Time_Frame();
+         break
    }
    
 }

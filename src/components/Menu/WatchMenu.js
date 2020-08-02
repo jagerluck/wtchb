@@ -28,7 +28,11 @@ const options = [
 
 export function WatchMenu() {
 
-   let optionsMap = options.map(el => <RotatingOption isRotating={el.isRotating} className="watch-opt-rotate" opt={el.opt} innText={el.innerText} />)
+   let bubbling = (e) => {
+      console.log(e.target)
+   }
+
+   let optionsMap = options.map((el, i) => <RotatingOption key={i+2000} isRotating={el.isRotating} className="watch-opt-rotate" opt={el.opt} innText={el.innerText}/>)
 
    return ( 
       <div className="change-watch-opt">

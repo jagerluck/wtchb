@@ -12,6 +12,9 @@ module.exports = {
       rules: [
          {
             test: /\.(js|jsx)$/,
+            include: [
+               path.resolve(__dirname, "src")
+            ],
             exclude: /node_modules/,
             use: [{ loader: "babel-loader"}]
          },
@@ -43,8 +46,9 @@ module.exports = {
       contentBase: path.join(__dirname, 'dist')
    }
 };
-      
 
+
+      
 
 
 

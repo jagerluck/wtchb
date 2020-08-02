@@ -5,10 +5,10 @@ import './style.css'
 
 
 
-function App(props) { 
+function App({state}) {
    return (
       <div className="app-container" theme="dark">
-         {props.state}
+         {state.element}
          <WatchMenu />
       </div>
    )
@@ -17,18 +17,12 @@ function App(props) {
 
 
 function mapStateToProps(state) {
-   console.log(state)
    return { state }
 }
 
 
 
 export default connect(
+   mapStateToProps,
    null,
-   mapStateToProps
 )(App)
-
-// need to wrap the hole container into connect function like so:
-// connect(mapState)(Component)
-// mapDispatchToProps or this instead of mapState idk 
-// probably write as it implemented in example

@@ -10,7 +10,7 @@ import { showFrame } from '../../redux/actions.js'
 
 function RotatingOption(props) {
    let { opt, isRotating, innText } = props;
-   
+
    let showFr = (frame) => {
       return props.showFrame(frame)
    }

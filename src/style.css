@@ -62,34 +62,6 @@
   z-index: 10;
 } 
 
-.scale-delimeters {
-  max-width: 0;
-  max-height: 0;
-  top: 0;
-  left: 0;
-  position: relative;
-  width: inherit;
-  height: inherit;
-  opacity: 1;
-  z-index: 11;
-}
-
-.scale-delimeters span {
-  position: absolute;
-  opacity: 1;
-  width: 1px;
-  transform-origin: top;
-  height: 6px;
-  background-color: var(--scale-color);
-}
-
-.scale-delimeters .big-scale {
-  height: 15px;
-  margin-left: -1px;
-  width: 2px;
-  background-color: var(--big-delimeter-color);
-}
-
 .clock-movement {
   all: unset;
   top: -100%;
@@ -104,6 +76,7 @@
   max-height: var(--clock-w-h-inner);
 }
 
+/* 
 .clock-frame .hour,
 .clock-frame .minute,
 .clock-frame .second {
@@ -158,19 +131,7 @@
   margin: auto;
 }
 
-.hour .hr {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 8px;
-  height: 80px;
-  border-radius: 6px;
-  background: var(--hour-hand);
-  animation: 43200s linear movehourhands infinite;
-  box-shadow: 1px 2px 9px rgb(31, 31, 31);
-}
-
-.hour .hr::after {
+.hour div::after {
   content: '';
   bottom: 0;
   width: 2px;
@@ -178,37 +139,13 @@
   background: linear-gradient(rgb(185, 131, 131), rgb(111, 51, 51));
 }
 
-.minute .mn {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 4px;
-  height: 110px;
-  border-radius: 4px;
-  background: var(--minute-hand);
-  animation: 3600s linear moveminhands infinite;
-}
-
-.minute .mn::after {
+.minute div::after {
   content: '';
   bottom: 0;
   width: 1px;
   height: 95px;
   background: rgb(255, 255, 255);
-}
-
-.second .sc {
-  width: 1px;
-  height: 140px;
-  background-color: var(--sec-hand);
-  animation: 60s linear movesechands infinite;
-}
-
-.clock-frame .hr, 
-.clock-frame .mn, 
-.clock-frame .sc {
-  transform-origin: bottom;
-}
+} */
 
 .layout {
   all: unset;
@@ -234,7 +171,6 @@
   z-index: 11;
   box-sizing: content-box;
 }
-
 
 .clock-number-3,
 .clock-number-9 {
@@ -461,3 +397,25 @@
 
 
 /* ***************** END ANIMATIONS ***************** */
+
+/* ****************** DELIMETERS ********************** */
+.big-delimeter {
+   position: absolute;
+   opacity: 1;
+   transform-origin: top;
+   height: 15px;
+   margin-left: -1px;
+   width: 2px;
+   background-color: rgb(168, 168, 168);
+}
+
+.small-delimeter {
+   position: absolute;
+   opacity: 1;
+   transform-origin: top;
+   width: 1px;
+   height: 6px;
+   background-color: rgb(92, 92, 92);
+}
+
+/* ****************** END DELIMETERS ********************** */
