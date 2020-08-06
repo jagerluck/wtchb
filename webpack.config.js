@@ -8,19 +8,17 @@ module.exports = {
       path: path.join(__dirname, 'dist'),
       filename: 'bundle.js'
    },
+   context: path.resolve(__dirname, 'src'),
    module: {
       rules: [
          {
             test: /\.(js|jsx)$/,
-            include: [
-               path.resolve(__dirname, "src")
-            ],
             exclude: /node_modules/,
             use: [{ loader: "babel-loader"}]
          },
          {
-            test:/\.css$/,
-            use: ['style-loader', 'css-loader']
+            test: /\.css$/,
+            use: [MiniCssExtractPlugin.loader, 'css-loader']
          },
          {
             test: /\.(png|jpg|gif|svg)$/i,

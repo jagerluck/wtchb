@@ -1,10 +1,13 @@
-import RotatingOption from './RotatingOption.js'
+import MenuOption from './MenuOption.js'
 import React from 'react'
+import { TIME, TIMER, STOPWATCH, CALENDAR } from '/redux/actions.js'
+
+console.log(TIME)
 
 
 const options = [
    {
-      opt: "time",
+      opt: "TIME",
       innerText: "Current Time",
       isRotating: false,
    },
@@ -28,14 +31,12 @@ const options = [
 
 export function WatchMenu() {
 
-   let bubbling = (e) => {
-      console.log(e.target)
-   }
-
-   let optionsMap = options.map((el, i) => <RotatingOption key={i+2000} isRotating={el.isRotating} className="watch-opt-rotate" opt={el.opt} innText={el.innerText}/>)
+   let optionsMap = options.map((el, i) => {
+      return <MenuOption key={i + 2000} isRotating={el.isRotating} opt={el.opt} innText={el.innerText} position={i === 0 ? 'top-border' : i === options.length - 1 ? 'bottom-border' : 'intermediate'}/>
+   })
 
    return ( 
-      <div className="change-watch-opt">
+      <div className="menu">
          {optionsMap}
       </div>
    )

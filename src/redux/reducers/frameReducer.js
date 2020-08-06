@@ -4,24 +4,28 @@ import { TIME, CALENDAR, TIMER, STOPWATCH } from '../actions.js'
 
 
 const initialState = {
-   currentFrame: ' ',
-   element: ' ',
+   currentFrame: '',
+   element: '',
+   rotate: false,
+   blocked() { return !this.rotate ? false : true },
    num: 0,
 }
 
 
 export function reduceState(state = initialState, action) {
-   let { type } = action
+   let { type, rotate } = action
 
    let newN = state.num + 1
 
+   if (state.currentFrame === type || !type) return state
+
    switch (type) {
       case TIME:
-         console.log(type)
          let newState = Object.assign({}, state, {
             currentFrame: type,
-            // need to remake the createFrame factory to provide complete react element, so I could keep it in store and pass to view
             element: CreateFrame(type),
+            rotate: rotate ? !state.rotate : state.rotate,
+            blocked() { return !this.rotate ? false : true },
             num: newN,
          })
          console.log('before returning new state')

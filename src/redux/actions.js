@@ -6,6 +6,7 @@ export const STOPWATCH = 'STOPWATCH'
 
 
 
-export const showFrame = frame => ({
-   type: frame
+export const showFrame = (frame, rotate) => ({
+   type: frame,
+   rotate: rotate
 })
