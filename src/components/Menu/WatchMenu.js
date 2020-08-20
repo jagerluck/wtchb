@@ -1,6 +1,6 @@
 import MenuOption from './MenuOption.js'
 import React from 'react'
-import { TIME, TIMER, STOPWATCH, CALENDAR } from '/redux/actions.js'
+import { TIME, TIMER, STOPWATCH, CALENDAR } from '../../redux/actions.js'
 
 console.log(TIME)
 
