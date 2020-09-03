@@ -34,6 +34,3 @@ export function reduceState(state = initialState, action) {
          return state
    }
 }
-
-
-// CreateFrame(action.type)

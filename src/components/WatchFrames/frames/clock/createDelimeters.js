@@ -1,5 +1,8 @@
 import React from 'react'
 
+
+
+// function which creates circle shaped delimeters in form of span (whatever is needed) elements
 export function createDelimeters(angle, amount_of_delimeters, startX, startY, hypotenuse) {
    let trVal = {
       hypse: hypotenuse,

@@ -4,10 +4,11 @@ import { ClockCanvas } from './frames/clock/ClockCanvas.js'
 
 export function CreateFrame(name) {
    let frame = ''
+   //console.log('create 0')
    switch (name) {
       case('TIME'):
-         frame = (<ClockCanvas functionality='time' />)
-         break
+         frame = <ClockCanvas functionality='time' />
+         break;
          // case('CALENDAR'):
       //    return _Frames('calendar');
       // case('STOPWATCH'):
@@ -15,10 +16,9 @@ export function CreateFrame(name) {
       // case('TIMER'):
       //    return new Timer_Frame('timer');
       default:
-         break
+         break;
    }
    
-   console.log(frame)
    return (
       <div className="frames">
          <div className="frames__clock-frame">

@@ -25,8 +25,6 @@ export function springsPos(functionality, movable) {
    resume within the state time
    `
 
-   console.log(functionality, ' inside of a springPos')
-
    switch (functionality) {
       case 'time':
          date = new Date()
@@ -61,11 +59,11 @@ export function springsPos(functionality, movable) {
                transform: rotate(${hour + 360 + adjhour}deg);
             }
          }`
-         break
+         break;
       case 'stopwatch':
-         break
+         break;
       default:
-         break
+         break;
    }
 
    return watchKeyframes

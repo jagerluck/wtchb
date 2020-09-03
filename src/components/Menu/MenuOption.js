@@ -13,14 +13,12 @@ function MenuOption(props) {
    let { opt, isRotating, innText, position } = props
    let rotatingClass = "menu__option"
 
-   console.log(props)
-
    let showFr = (frame, rotate) => {
       return props.showFrame(frame, rotate)
    }
 
    let start = (e) => {
-      e.stopPropagation()
+      e.stopImmediatePropagation()
    }
 
    let stop = (e) => {
