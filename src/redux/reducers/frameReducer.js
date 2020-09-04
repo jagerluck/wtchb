@@ -24,8 +24,6 @@ export function reduceState(state = initialState, action) {
          let newState = Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
-            rotate: rotate ? !state.rotate : state.rotate,
-            blocked() { return !this.rotate ? false : true },
             num: newN,
          })
          console.log('before returning new state')

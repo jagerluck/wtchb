@@ -10,7 +10,7 @@ import { showFrame } from '../../redux/actions.js'
 // }
 
 function MenuOption(props) {
-   let { opt, isRotating, innText, position } = props
+   let { opt, isRotating, innText, position, rotatedOption, showFrame } = props;
    let rotatingClass = "menu__option"
 
    let showFr = (frame, rotate) => {
@@ -18,16 +18,14 @@ function MenuOption(props) {
    }
 
    let start = (e) => {
-      e.stopImmediatePropagation()
+      e.preventDefault();
    }
 
    let stop = (e) => {
-      e.stopImmediatePropagation()
+      e.preventDefault();
    }
 
    let triggerFrAndRotate = (e, frame, rotate) => {
-      frame = frame.toUpperCase()
-      console.log(e.target.className)
       return props.showFrame(frame, rotate)
    }
 

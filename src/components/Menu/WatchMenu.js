@@ -1,5 +1,5 @@
 import MenuOption from './MenuOption.js'
-import React from 'react'
+import React, { useRef } from 'react'
 import { TIME, TIMER, STOPWATCH, CALENDAR } from '../../redux/actions.js'
 
 
@@ -12,17 +12,17 @@ const options = [
       isRotating: false,
    },
    {
-      opt: "stopwatch",
+      opt: "STOPWATCH",
       innerText: "Stopwatch",
       isRotating: true,
    },
    {
-      opt: "timer",
+      opt: "TIMER",
       innerText: "Timer",
       isRotating: true,
    },
    {
-      opt: "calendar",
+      opt: "CALENDAR",
       innerText: "Calendar",
       isRotating: false,
    },
@@ -31,8 +31,28 @@ const options = [
 
 export function WatchMenu() {
 
+   const rotatedOption = useRef({
+      isRotated: false,
+      element: ''
+   });
+
    let optionsMap = options.map((el, i) => {
-      return <MenuOption key={i + 2000} isRotating={el.isRotating} opt={el.opt} innText={el.innerText} position={i === 0 ? 'top-border' : i === options.length - 1 ? 'bottom-border' : 'intermediate'}/>
+      return (
+         <MenuOption
+            rotatedOption={rotatedOption}
+            key={i + 2000}
+            isRotating={el.isRotating}
+            opt={el.opt}
+            innText={el.innerText}
+            position={
+               i === 0
+                  ? 'top-border'
+                  : i === options.length - 1
+                  ? 'bottom-border'
+                  : 'intermediate'
+            }
+         />
+      );
    })
 
    return ( 
