@@ -6,29 +6,35 @@ module.exports = {
    entry: './src/index.js',
    output: {
       path: path.join(__dirname, 'dist'),
-      filename: 'bundle.js'
+      filename: 'bundle.js',
    },
    module: {
       rules: [
          {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
-            use: [{ loader: "babel-loader"}]
+            use: [{ loader: 'babel-loader' }],
          },
          {
             test: /\.css$/,
-            use: [MiniCssExtractPlugin.loader, 'css-loader']
+            use: [MiniCssExtractPlugin.loader, 'css-loader'],
          },
          {
             test: /\.(png|jpg|gif|svg)$/i,
-            use: [{
-               loader: 'url-loader',
-               options: {
-                  limit: 8192,
+            use: [
+               {
+                  loader: 'url-loader',
+                  options: {
+                     limit: 8192,
+                  },
                },
-            },],
-         }
-      ]
+            ],
+         },
+      ],
+   },
+   // resolve path to load modules
+   resolve: {
+      modules: ['src', 'node_modules'],
    },
    plugins: [
       new MiniCssExtractPlugin({
@@ -40,8 +46,8 @@ module.exports = {
    ],
    devtool: 'cheap-module-eval-source-map',
    devServer: {
-      contentBase: path.join(__dirname, 'dist')
-   }
+      contentBase: path.join(__dirname, 'dist'),
+   },
 };
 
 

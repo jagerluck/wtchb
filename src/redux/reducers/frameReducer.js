@@ -1,34 +1,51 @@
-import { CreateFrame } from '../../components/WatchFrames/CreateFrame.js'
-import { TIME, CALENDAR, TIMER, STOPWATCH } from '../actions.js'
+import { CreateFrame } from 'components/WatchFrames/CreateFrame.js'
+import { TIME, CALENDAR, TIMER, STOPWATCH } from 'redux/actions.js'
 
 
 
 const initialState = {
    currentFrame: '',
    element: '',
-   rotate: false,
-   blocked() { return !this.rotate ? false : true },
-   num: 0,
-}
+   rotatedSt: false,
+};
 
 
-export function reduceState(state = initialState, action) {
+export function frameReducer(state = initialState, action) {
    let { type, rotate } = action
+   let newState;
 
-   let newN = state.num + 1
-
-   if (state.currentFrame === type || !type) return state
+   console.log('before creating form')
 
    switch (type) {
       case TIME:
-         let newState = Object.assign({}, state, {
+         newState = Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
-            num: newN,
-         })
-         console.log('before returning new state')
-         return newState
-      default: 
-         return state
+            rotatedSt: false,
+         });
+         return newState;
+      case CALENDAR:
+         newState = Object.assign({}, state, {
+            currentFrame: type,
+            element: CreateFrame(type),
+            rotatedSt: false,
+         });
+         return newState;
+      case TIMER:
+         newState = Object.assign({}, state, {
+            currentFrame: type,
+            element: CreateFrame(type),
+            rotatedSt: state.rotatedSt ? false : true,
+         });
+         return newState;
+      case STOPWATCH:
+         newState = Object.assign({}, state, {
+            currentFrame: type,
+            element: CreateFrame(type),
+            rotatedSt: state.rotatedSt ? false : true,
+         });
+         return newState;
+      default:
+         return state;
    }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { WatchMenu } from './components/Menu/WatchMenu.js'
-import './style.css'
+import { WatchMenu } from 'components/Menu/WatchMenu.js'
+import 'style.css'
 
 
 

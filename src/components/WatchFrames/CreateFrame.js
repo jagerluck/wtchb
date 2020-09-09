@@ -1,20 +1,31 @@
 import React from 'react'
-import { ClockCanvas } from './frames/clock/ClockCanvas.js'
+import { ClockCanvas } from './frames/ClockCanvas.js'
+import TimerFrame from './frames/TimerFrame.js';
+import { CalendarFrame } from './frames/CalendarFrame.js';
+
 
 
 export function CreateFrame(name) {
    let frame = ''
    //console.log('create 0')
    switch (name) {
-      case('TIME'):
-         frame = <ClockCanvas functionality='time' />
+      case 'TIME':
+         frame = <ClockCanvas functionality="time" />;
          break;
-         // case('CALENDAR'):
+      // case('CALENDAR'):
       //    return _Frames('calendar');
-      // case('STOPWATCH'):
-      //    return Stopwatch_Frame('stopwatch');
-      // case('TIMER'):
-      //    return new Timer_Frame('timer');
+      case 'TIMER':
+         frame = <TimerFrame />;
+         // case(''):
+         break;
+      case 'STOPWATCH':
+         frame = <ClockCanvas functionality="stopwatch" />;
+         // case(''):
+         break;
+      case 'CALENDAR':
+         frame = <CalendarFrame />;
+         // case(''):
+         break;
       default:
          break;
    }

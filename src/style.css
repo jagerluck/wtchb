@@ -1,78 +1,79 @@
 :root {
-  --scale-color:rgb(92, 92, 92);
-  --big-delimeter-color: rgb(168, 168, 168);
-  --hour-hand: linear-gradient(rgb(109, 85, 85), rgb(77, 50, 50));
-  --minute-hand: rgb(168, 129, 129);
-  --sec-hand: rgb(255, 46, 46);
-  --spring-color: linear-gradient(rgb(147, 80, 80), rgb(73, 28, 28));
-  --clock-w-h: 360px;
-  --clock-w-h-inner: 330px;
-  --calendar-w-h: 400px;
-  --main-color: #102323;
+   --scale-color: rgb(92, 92, 92);
+   --big-delimeter-color: rgb(168, 168, 168);
+   --hour-hand: linear-gradient(rgb(109, 85, 85), rgb(77, 50, 50));
+   --minute-hand: rgb(168, 129, 129);
+   --sec-hand: rgb(255, 46, 46);
+   --spring-color: linear-gradient(rgb(147, 80, 80), rgb(73, 28, 28));
+   --clock-w-h: 360px;
+   --clock-w-h-inner: 330px;
+   --calendar-w-h: 400px;
+   --main-color: #102323;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  background-color: var(--main-color);
+   margin: 0;
+   padding: 0;
+   background-color: var(--main-color);
 }
 
 .app-container {
-  display: flex;
-  margin: 2rem;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  flex-flow: row wrap;
-  min-height: 100vh;
+   display: flex;
+   margin: 2rem;
+   position: relative;
+   justify-content: center;
+   align-items: center;
+   flex-flow: row wrap;
+   min-height: 100vh;
 }
 
 .frames {
-  position: relative;
-  width: 400px;
-  height: 400px;
+   position: relative;
+   width: 400px;
+   height: 400px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .frames__clock-frame {
-  display: flex;
-  box-sizing: border-box;
-  position: absolute;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  min-width: var(--clock-w-h);
-  min-height: var(--clock-w-h);
-  border: 4px solid #102020;
-  box-shadow: 0 -15px 15px rgba(255,255,255, .05),
-              inset 0 -15px 15px rgba(255,255,255, .05),
-              0 15px 15px rgba(0,0,0, .3),
-              inset 0 15px 15px rgba(0,0,0, .3);
-  transition: all .5s linear;
+   display: flex;
+   box-sizing: border-box;
+   position: absolute;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-items: center;
+   border-radius: 50%;
+   min-width: var(--clock-w-h);
+   min-height: var(--clock-w-h);
+   border: 4px solid #102020;
+   box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
+      inset 0 -15px 15px rgba(255, 255, 255, 0.05),
+      0 15px 15px rgba(0, 0, 0, 0.3), inset 0 15px 15px rgba(0, 0, 0, 0.3);
+   transition: all 0.5s linear;
 }
 
 .scale-container {
-  position: absolute;
-  border-radius: 50%;
-  width: var(--clock-w-h-inner);
-  height: var(--clock-w-h-inner);
-  z-index: 10;
-} 
-
+   position: absolute;
+   border-radius: 50%;
+   width: var(--clock-w-h-inner);
+   height: var(--clock-w-h-inner);
+   z-index: 10;
+}
 
 .clock-numbers {
-  all: unset;
-  display: flex;
-  position: relative;
-  margin: auto;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  width: var(--clock-w-h-inner);
-  height: var(--clock-w-h-inner);
-  color: whitesmoke;
-  box-sizing: border-box;
-  border-radius: 50%;
+   all: unset;
+   display: flex;
+   position: relative;
+   margin: auto;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-items: center;
+   width: var(--clock-w-h-inner);
+   height: var(--clock-w-h-inner);
+   color: whitesmoke;
+   box-sizing: border-box;
+   border-radius: 50%;
 }
 
 .clock-numbers__12,
@@ -87,11 +88,15 @@
 
 .clock-numbers__3,
 .clock-numbers__9 {
-   padding: 0 2rem .5rem 2rem;
+   padding: 0 2rem 0.5rem 2rem;
 }
 
-.clock-numbers__6 { padding: 1.5rem }
-.clock-numbers__12 { padding: 1.25rem }
+.clock-numbers__6 {
+   padding: 1.5rem;
+}
+.clock-numbers__12 {
+   padding: 1.25rem;
+}
 
 .clock-numbers__12,
 .clock-numbers__3,
@@ -124,15 +129,14 @@
    flex-flow: row wrap;
    border: solid 4px rgb(43, 41, 41);
    box-shadow: 0 -5px 15px rgba(255, 255, 255, 0.125),
-   0 -25px 15px rgba(255, 255, 255, 0.055),
-   10px 5px 50px rgba(0, 0, 0, 0.403),
-   5px 10px 25px rgb(0, 0, 0);
+      0 -25px 15px rgba(255, 255, 255, 0.055),
+      10px 5px 50px rgba(0, 0, 0, 0.403), 5px 10px 25px rgb(0, 0, 0);
 }
 
 .menu__option,
 .menu__option--rotated {
    min-width: 390px;
-   margin: .3rem 0;
+   margin: 0.3rem 0;
    height: 3rem;
    color: aliceblue;
    position: relative;
@@ -142,16 +146,17 @@
    display: flex;
    transform-style: preserve-3d;
    background-color: unset;
-   transition: all .5s ease-in;
+   transition: all 0.5s ease-in;
 }
 
-.menu__option:first-of-type {
-   margin-top: 0 !important;
+.menu__option:first-of-type .menu__btn {
+   margin-top: 0;
+   border-radius: 1rem 1rem 0 0;
 }
 
-.menu--top-border { border-radius: 1rem 1rem 0 0; }
-.menu--bottom-border { border-radius: 0 0 1rem 1rem; }
-.menu--intermediate-border { border-radius: 0; }
+.menu__option:last-of-type .menu__btn {
+   border-radius: 0 0 1rem 1rem;
+}
 
 .menu__option--front,
 .menu__option--back,
@@ -180,12 +185,12 @@
 }
 
 .menu__option--back {
-   transform: rotateX(180deg) translateZ(1.5rem);  
+   transform: rotateX(180deg) translateZ(1.5rem);
 }
 
 .menu__option--rotated {
    transform: rotateX(-180deg);
-   transition: all .5s ease-in;
+   transition: all 0.5s ease-in;
 }
 
 .menu__btn {
@@ -224,17 +229,17 @@
 }
 
 .clock-springs {
-  all: unset;
-  top: -100%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  min-width: var(--clock-w-h-inner);
-  min-height: var(--clock-w-h-inner);
-  max-width: var(--clock-w-h-inner);
-  max-height: var(--clock-w-h-inner);
+   all: unset;
+   top: -100%;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 50%;
+   min-width: var(--clock-w-h-inner);
+   min-height: var(--clock-w-h-inner);
+   max-width: var(--clock-w-h-inner);
+   max-height: var(--clock-w-h-inner);
 }
 
 .clock-springs__hour,
@@ -340,103 +345,97 @@
    animation: 60s linear movesechands infinite;
 }
 
-
 /***************CALENDAR****************/
 
 .calendar-frame {
-  margin: 1rem;
-  display: flex;
-  position: absolute;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  border-radius: 1rem;
-  width: var(--clock-w-h);
-  height: var(--clock-w-h);
-  border: 4px solid #102020;
-  color: beige;
-  box-shadow: 0 -15px 15px rgba(255,255,255, .05),
-              inset 0 -15px 15px rgba(255,255,255, .05),
-              0 15px 15px rgba(0,0,0, .3),
-              inset 0 15px 15px rgba(0,0,0, .3);
-  transition: all .5s linear;
+   margin: 1rem;
+   display: flex;
+   position: absolute;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-items: center;
+   border-radius: 1rem;
+   width: var(--clock-w-h);
+   height: var(--clock-w-h);
+   border: 4px solid #102020;
+   color: beige;
+   box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
+      inset 0 -15px 15px rgba(255, 255, 255, 0.05),
+      0 15px 15px rgba(0, 0, 0, 0.3), inset 0 15px 15px rgba(0, 0, 0, 0.3);
+   transition: all 0.5s linear;
 }
 
 .calendar-frame.show {
-  display: flex;
+   display: flex;
 }
 
 .calendar-frame li {
-  all: unset;
+   all: unset;
 }
 
 .calendar__title-field {
-  flex: 1 0 100%;
-  display: flex;
-  justify-content: center;
-  flex-flow: row nowrap;
-  padding-top: 2rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  
+   flex: 1 0 100%;
+   display: flex;
+   justify-content: center;
+   flex-flow: row nowrap;
+   padding-top: 2rem;
+   height: 2.5rem;
+   line-height: 2.5rem;
 }
 
 /* Arrows, half past 0 and I realized that it needs to be js to be able to click that shit... */
 .calendar__title-field::before {
-   background-image: url("./pics/arrow.svg");
+   background-image: url('./pics/arrow.svg');
    background-size: contain;
    background-repeat: no-repeat;
-   padding: 1.5rem .75rem .25rem .75rem;
-   margin: .5rem 1rem;
+   padding: 1.5rem 0.75rem 0.25rem 0.75rem;
+   margin: 0.5rem 1rem;
    color: aliceblue;
    filter: brightness(2);
    transform: scale(1.5);
-   content: "";
+   content: '';
    cursor: pointer;
 }
 .calendar__title-field::after {
-   background-image: url("./pics/arrow.svg");
+   background-image: url('./pics/arrow.svg');
    background-size: contain;
    background-repeat: no-repeat;
    transform: scale(1.5) rotate(180deg);
    filter: brightness(2);
-   padding: 1.5rem .75rem .25rem .75rem;
-   margin: .5rem 1rem;
-   content: "";
+   padding: 1.5rem 0.75rem 0.25rem 0.75rem;
+   margin: 0.5rem 1rem;
+   content: '';
    cursor: pointer;
 }
 
 .calendar__date-field {
-  height: 200px;
-  text-align: center;
+   height: 200px;
+   text-align: center;
 }
 
 .calendar__date-field .weekdays {
-  width: 350px;
-  display: flex;
-  flex-flow: row nowrap;
+   width: 350px;
+   display: flex;
+   flex-flow: row nowrap;
 }
 
 .calendar__date-field .weekdays li {
-  flex: 1 1 50px;
-  margin: .2rem;
+   flex: 1 1 50px;
+   margin: 0.2rem;
 }
 
-
 .calendar__date-field .days {
-  display: flex;
-  width: 350px;
-  flex-flow: row wrap;
+   display: flex;
+   width: 350px;
+   flex-flow: row wrap;
 }
 
 .calendar__date-field .days li {
-  flex: 0 0 50px;
-  margin: .2rem 0;
+   flex: 0 0 50px;
+   margin: 0.2rem 0;
 }
 
-
 /* ***************** ANIMATIONS ***************** */
-
 
 /* ***************** END ANIMATIONS ***************** */
 

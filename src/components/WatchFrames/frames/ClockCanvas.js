@@ -1,7 +1,7 @@
 import React from 'react'
-import { createDelimeters } from './createDelimeters.js'
-import ClockSprings from './ClockSprings.js'
-import { springsPos } from './springsPos.js'
+import { createDelimeters } from './clock/createDelimeters.js'
+import ClockSprings from './clock/ClockSprings.js'
+import { springsPos } from './clock/springsPos.js'
 
 
 // watch ticks with help of css transform degrees

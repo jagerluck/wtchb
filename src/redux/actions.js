@@ -10,3 +10,8 @@ export const showFrame = (frame, rotate) => ({
    type: frame,
    rotate: rotate
 })
+
+
+export const showFrameStatus = (status) => ({
+   status: status
+})

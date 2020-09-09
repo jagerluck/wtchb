@@ -3,10 +3,10 @@ import React from 'react'
 import App from './App.js'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { reduceState } from './redux/reducers/frameReducer.js'
+import cReducer from './redux/reducers/cReducer.js';
 
 
-const store = createStore(reduceState)
+const store = createStore(cReducer);
 
 const reactRoot = document.getElementById('react-root')
 
