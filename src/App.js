@@ -5,21 +5,21 @@ import 'style.css'
 
 
 
-function App({state}) {
+function App(frameReducer) {
+   console.log(frameReducer.element)
    return (
       <div className="app-container" theme="dark">
-         {state.element}
+         {frameReducer.element}
          <WatchMenu />
       </div>
-   )
+   );
 }
-
 
 
 function mapStateToProps(state) {
-   return { state }
+   const { frameReducer } = state;
+   return frameReducer;
 }
-
 
 
 export default connect(

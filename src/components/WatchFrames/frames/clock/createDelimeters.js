@@ -1,9 +1,30 @@
 import React from 'react'
 
 
+export function CreateDelimeters(
+   angle,
+   amount_of_delimeters,
+   startX,
+   startY,
+   hypotenuse
+) {
+   const MemoizedDelimeters = React.useCallback(
+      () => buildDelimeters(
+            angle,
+            amount_of_delimeters,
+            startX,
+            startY,
+            hypotenuse
+         ),
+      [angle, amount_of_delimeters]
+   );
+
+   return <MemoizedDelimeters />;
+}
+
 
 // function which creates circle shaped delimeters in form of span (whatever is needed) elements
-export function createDelimeters(angle, amount_of_delimeters, startX, startY, hypotenuse) {
+function buildDelimeters(angle, amount_of_delimeters, startX, startY, hypotenuse) {
    let trVal = {
       hypse: hypotenuse,
       el_angle: 0,
@@ -19,26 +40,21 @@ export function createDelimeters(angle, amount_of_delimeters, startX, startY, hy
       trY() { return this.startY + this.tang() * (Math.cos(this.toRad(this.cathAngl()))) },
    }
 
-   function createScaleSpans() {
-      let spans = new Array(amount_of_delimeters)
-      const big_delim = amount_of_delimeters / 12
+   let spans = new Array(amount_of_delimeters)
+   const big_delim = amount_of_delimeters / 12
 
-      for (let i = 0; i < amount_of_delimeters; i++) {
-         let transformation = `
-            translateY(${trVal.trY()}px) 
-            translateX(${ trVal.trX()}px)
-            rotate(${trVal.el_angle}deg)
-            `
-         if (i % big_delim === 0) {
-            spans.push(<span className="big-delimeter" style={{ transform: transformation }} key={i + 100} />)
-         } else {
-            spans.push(<span className="small-delimeter" style={{ transform: transformation }} key={i + 100} />)
-         }
-         trVal.el_angle += angle
+   for (let i = 0; i < amount_of_delimeters; i++) {
+      let transformation = `
+         translateY(${trVal.trY()}px) 
+         translateX(${ trVal.trX()}px)
+         rotate(${trVal.el_angle}deg)
+         `
+      if (i % big_delim === 0) {
+         spans.push(<span className="big-delimeter" style={{ transform: transformation }} key={i + 100} />)
+      } else {
+         spans.push(<span className="small-delimeter" style={{ transform: transformation }} key={i + 100} />)
       }
-      return spans
+      trVal.el_angle += angle
    }
-
-
-   return createScaleSpans()
+   return spans
 }

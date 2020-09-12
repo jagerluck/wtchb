@@ -1,5 +1,5 @@
 import React from 'react'
-import { ClockCanvas } from './frames/ClockCanvas.js'
+import ClockCanvas from './frames/ClockCanvas.js'
 import TimerFrame from './frames/TimerFrame.js';
 import { CalendarFrame } from './frames/CalendarFrame.js';
 
@@ -27,14 +27,15 @@ export function CreateFrame(name) {
          // case(''):
          break;
       default:
+         frame = null;
          break;
    }
    
-   return (
+   return frame == null ? (<div/>) : (
       <div className="frames">
          <div className="frames__clock-frame">
             {frame}
          </div>
       </div>
-   )
+   ) 
 }

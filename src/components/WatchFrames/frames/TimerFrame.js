@@ -6,30 +6,46 @@ import { connect } from 'react-redux';
 
 function TimerFrame(props) {
    let { status } = props;
-   let [ statusTimer, setStatusTimer ] = React.useState('start')
-   console.log(props)
 
    return (
       <Timer
-      //formatValue={(value) => `${value < 10 ? `0${value}` : value} units `}
+         startImmediately={false}
+         //formatValue={(value) => `${value < 10 ? `0${value}` : value} units `}
       >
-         {({ start, resume, pause, timerState }) => (
+         {({ start, stop, resume, reset, pause, timerState }) => {
+            switch (status) {
+               case 'run':
+                  start();
+                  break;
+               case 'reset':
+                  reset();
+                  break;
+               case 'pause':
+                  pause();
+                  break;
+               default:
+                  break;
+            }
+            return (
             <>
-               <div>{timerState}</div>
                <Timer.Hours formatValue={(value) => `${value} hours. `} />
                <Timer.Minutes formatValue={(value) => `${value} minutes.`} />
-               <Timer.Seconds
-                  formatValue={(value) => `${value} seconds. `}
-               />
+               <Timer.Seconds formatValue={(value) => `${value} seconds. `} />
             </>
-         )}
+            )}
+         }
       </Timer>
    );
 }
 
 
+function showFrameStatus(props) {
+   const { frameStatusReducer } = props;
+   return {status: frameStatusReducer.status};
+}
+
 
 export default connect(
-   () => ({ status }),
+   showFrameStatus,
    null
 )(TimerFrame)

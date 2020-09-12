@@ -5,34 +5,54 @@ import RotatedOption from './Options/RotatedOption.js';
 import { SimpleOption } from './Options/SimpleOption.js';
 
 
+const control = new Map([
+   ['TIME'],
+   [
+      'TIMER',
+      [
+         {
+            option: 'run',
+            name: 'Run',
+         },
+         {
+            option: 'pause',
+            name: 'Pause',
+         },
+         {
+            option: 'reset',
+            name: 'Reset',
+         },
+      ],
+   ],
+   [
+      'STOPWATCH',
+      [
+         {
+            option: 'run',
+            name: 'Run',
+         },
+         {
+            option: 'pause',
+            name: 'Pause',
+         },
+         {
+            option: 'reset',
+            name: 'Reset',
+         },
+      ],
+   ],
+   ['CALENDAR'],
+]);
 
 
 function MenuOption(props) {
-   let { frame, isRotating, innText, position, rotatedSt } = props;
-
-   
-   return isRotating === true ? (
-      <RotatedOption
-         frame={frame}
-         innText={innText}
-         position={position}
-         showFrame={showFrame}
-         rotatedSt={rotatedSt}
-      />
-   ) : (
-      <SimpleOption
-         frame={frame}
-         innText={innText}
-         position={position}
-         showFrame={showFrame}
-      />
-   );
+   return (<RotatedOption adjs={control.get(props.frame)} {...props} />)
 }
 
 
 function mapStateToProps(state) {
-   let { rotatedSt } = state;
-   return { rotatedSt: rotatedSt };
+   const { frameReducer } = state
+   return { rotated: frameReducer.rotated };
 }
 
 

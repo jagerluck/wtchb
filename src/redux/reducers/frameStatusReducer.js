@@ -1,10 +1,14 @@
-export function frameStatusReducer(state, action) {
-
-   let { status } = action
-   
-
-   return Object.assign({}, state, {
-      status: status
-   })
+const initState = {
+   status: 'stop'
 }
 
+export function frameStatusReducer(state=initState, status) {
+   let { type } = status;
+   if (!type) return state;
+   
+   let newState = Object.assign({}, state, {
+      status: type,
+   });
+
+   return newState
+}

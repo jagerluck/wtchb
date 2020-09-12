@@ -6,12 +6,11 @@ export const STOPWATCH = 'STOPWATCH'
 
 
 
-export const showFrame = (frame, rotate) => ({
-   type: frame,
-   rotate: rotate
+export const showFrame = (frame, rotated) => ({
+   type: frame
 })
 
 
-export const showFrameStatus = (status) => ({
-   status: status
+export const changeFrameStatus = (status) => ({
+   type: status
 })

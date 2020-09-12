@@ -1,58 +1,63 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showFrameStatus } from 'redux/actions.js'
+import { changeFrameStatus } from 'redux/actions.js';
 
 
 
 function RotatedOption(props) {
-   let { showFrame, innText, frame, position, rotatedSt } = props;
+   let {
+      showFrame,
+      innText,
+      frame,
+      position,
+      rotated,
+      changeFrameStatus,
+      adjs,
+   } = props;
    let [rotatingClass, setRotatingClass] = React.useState('menu__option');
 
-   let triggerFrame = (frame, rotateOpt, cancel = false) => {
+   let triggerFrame = (frame, cancel = false) => {
       // check if something was in active state (rotated)
-      if (rotatedSt && cancel === false)
-         return alert('Cancel current element!');
-      if (rotateOpt) {
-         rotatingClass === 'menu__option '
-            ? setRotatingClass('menu__option--rotated')
-            : setRotatingClass('menu__option');
-      }
-      return showFrame(frame, rotateOpt);
-   };
-   
-   let run = (e) => {
-      e.preventDefault();
-      interactTime('run');
+      console.log(rotated, cancel);
+      if (rotated && !cancel) return alert('Cancel current element!');
+      rotatingClass === 'menu__option' ? 
+         setRotatingClass('menu__option--rotated')
+         : setRotatingClass('menu__option');
+      return cancel ? showFrame('another') : showFrame(frame);
    };
 
-   let stop = (e) => {
+   let adjsMap;
+   if (!adjs) {
+      adjsMap = ('');
+   } else {
+      adjsMap = adjs.map((el) => (
+         <button className="menu__btn--back" onClick={(e) => control(e, el.option)}>
+            {el.name}
+         </button>
+      ));
+   } 
+   
+
+   function control(e, type) {
       e.preventDefault();
-      interactTime('stop');
+      return changeFrameStatus(type);
    };
 
 
    return (
       <div className={rotatingClass + position}>
          <div className="menu__option--front">
-            <button
-               className="menu__btn"
-               onClick={() => triggerFrame(frame, true)}
-            >
+            <button className="menu__btn" onClick={() => triggerFrame(frame)}>
                {innText}
             </button>
          </div>
          <div className="menu__option--top"></div>
          <div className="menu__option--bottom"></div>
          <div className="menu__option--back">
-            <button className="menu__btn--back" onClick={stop}>
-               Stop
-            </button>
-            <button className="menu__btn--back" onClick={run}>
-               Start
-            </button>
+            {adjsMap}
             <button
                className="menu__btn--back"
-               onClick={() => triggerFrame(frame, true, true)}
+               onClick={() => triggerFrame(frame, true)}
             >
                Cancel
             </button>
@@ -62,4 +67,5 @@ function RotatedOption(props) {
 }
 
 
-export default connect(null, { showFrameStatus })(RotatedOption);
+
+export default connect(null, { changeFrameStatus })(RotatedOption);

@@ -6,46 +6,45 @@ import { TIME, CALENDAR, TIMER, STOPWATCH } from 'redux/actions.js'
 const initialState = {
    currentFrame: '',
    element: '',
-   rotatedSt: false,
+   rotated: false,
 };
 
 
 export function frameReducer(state = initialState, action) {
-   let { type, rotate } = action
+   let { type } = action
    let newState;
-
-   console.log('before creating form')
 
    switch (type) {
       case TIME:
          newState = Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
-            rotatedSt: false,
+            rotated: state.rotated ? false : true,
          });
-         return newState;
+         break;
       case CALENDAR:
          newState = Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
-            rotatedSt: false,
+            rotated: state.rotated ? false : true,
          });
-         return newState;
+         break;
       case TIMER:
          newState = Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
-            rotatedSt: state.rotatedSt ? false : true,
+            rotated: state.rotated ? false : true,
          });
-         return newState;
+         break;
       case STOPWATCH:
          newState = Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
-            rotatedSt: state.rotatedSt ? false : true,
+            rotated: state.rotated ? false : true,
          });
-         return newState;
+         break;
       default:
-         return state;
-   }
+         newState = Object.assign({}, initialState);
+      }
+   return newState
 }
