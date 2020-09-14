@@ -10,6 +10,18 @@ function ClockCanvas(props) {
    const delimeters = CreateDelimeters(2, 180, 165, 0, 165);
    let { functionality, frameStatusReducer : { status } } = props; 
 
+   let springsStPos;
+   switch(functionality) {
+      case 'stopwatch':
+         springsStPos = springsPos('stopwatch');
+         break;
+      case 'time':
+         springsStPos = springsPos('time');
+         break;
+      default:
+         springsStPos = springsPos('stopwatch');
+   }
+
    return (
       <div className="scale-container" id="timenow">
          <div className="scale-delimeters">{delimeters}</div>
@@ -19,7 +31,10 @@ function ClockCanvas(props) {
             <span className="clock-numbers__6">6</span>
             <span className="clock-numbers__9">9</span>
          </div>
-         <ClockSprings springsPositions={springsPos(functionality)} />
+         <ClockSprings
+            springsStPos={springsStPos}
+            functionality={functionality}
+         />
       </div>
    );
 }

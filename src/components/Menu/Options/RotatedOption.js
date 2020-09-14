@@ -18,7 +18,6 @@ function RotatedOption(props) {
 
    let triggerFrame = (frame, cancel = false) => {
       // check if something was in active state (rotated)
-      console.log(rotated, cancel);
       if (rotated && !cancel) return alert('Cancel current element!');
       rotatingClass === 'menu__option' ? 
          setRotatingClass('menu__option--rotated')
@@ -31,18 +30,20 @@ function RotatedOption(props) {
       adjsMap = ('');
    } else {
       adjsMap = adjs.map((el) => (
-         <button className="menu__btn--back" onClick={(e) => control(e, el.option)}>
+         <button
+            key={el.name}
+            className="menu__btn--back"
+            onClick={(e) => control(e, el.option)}
+         >
             {el.name}
          </button>
       ));
    } 
    
-
    function control(e, type) {
       e.preventDefault();
       return changeFrameStatus(type);
    };
-
 
    return (
       <div className={rotatingClass + position}>

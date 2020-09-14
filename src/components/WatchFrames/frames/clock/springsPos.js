@@ -1,5 +1,5 @@
 function watchKeyframes(sec, min, hour, adjmin=0, adjhour=0) {
-   console.log('inside watchKeyFtrames', sec, min, hour, adjmin);
+   // console.log('inside watchKeyFtrames', sec, min, hour, adjmin);
 
    return `
    @keyframes movesechands {
@@ -42,6 +42,6 @@ export function springsPos(functionality) {
       case 'stopwatch':
          return watchKeyframes(0, 0, 0);
       default:
-         break;
+         return ``;
    }
 }
