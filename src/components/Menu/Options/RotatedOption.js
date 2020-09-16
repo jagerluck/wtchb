@@ -2,7 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeFrameStatus } from 'redux/actions.js';
 
+class Bam extends React.Component {
+   constructor() {
+      this.state = 'some value'
+   }
 
+   bobo() {
+      this.setState('lolo')
+   }
+}
 
 function RotatedOption(props) {
    let {

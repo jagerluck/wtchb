@@ -26,18 +26,6 @@ function iterator() {
    }
 }
 
-function Doo() {
-   this.ii = 'ii'
-   this.oo = 'oo'
-}
-
-Doo.prototype.jj = function() {
-   return console.log('hey bro')
-}
-
-const j = new Doo()
-
-console.log(j.jj())
 
 
 // make an array of arguments ES5
@@ -74,14 +62,30 @@ const lolo = () => {
 // debounce(lolo, 1000)
 
 function work() {
-   return [].reduce.call(arguments, (ac, cu) => {
-      ac.push(cu)
-      return ac
-   }, [])
+   return [].reduce.call(
+      !this.v ? arguments : this.v,
+      (ac, cu) => {
+         ac.push(cu);
+         return ac;
+      },
+      []
+   );
 }
 
 
-console.log(work(1, 2)) // 3
-console.log(work(4, 5)) // 9
 
+function Ball(size) {
+   this.definition = '\nI\'m a Ball!'
+   // this.ability = '\nI\'m rounded'
+   this.size = size
+}
+Ball.prototype.ability = '\nI could fly';
 
+function Game(size) {
+   Ball.call(this, size)
+   this.theMostNew = 'most new prop'
+}
+
+let g = new Game('small')
+
+console.log(g)
