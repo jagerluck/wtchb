@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import WatchMenu from 'components/Menu/WatchMenu.js'
+import PicsDrops from 'components/Nonames/PicsDrops.js';
 import 'style.css'
 
 
@@ -10,6 +11,7 @@ function App(frameReducer) {
       <div className="app-container" theme="dark">
          {frameReducer.element}
          <WatchMenu />
+         <PicsDrops />
       </div>
    );
 }
