@@ -1,17 +1,28 @@
-import React from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import WatchMenu from 'components/Menu/WatchMenu.js'
-import PicsDrops from 'components/Nonames/PicsDrops.js';
-import 'style.css'
+import React from 'react'
 
+import 'style.css'
+import WatchMenu from 'components/Menu/WatchMenu.js';
+import CheckMounting from 'components/CheckMounting.js';
 
 
 function App(frameReducer) {
    return (
       <div className="app-container" theme="dark">
+         {/* display element from store */}
          {frameReducer.element}
          <WatchMenu />
-         <PicsDrops />
+         <Router>
+            <Link to="/new">
+               To check mounting phases
+            </Link>
+               <Switch>
+                  <Route path="/new">
+                     <CheckMounting />
+                  </Route>
+               </Switch>
+         </Router>
       </div>
    );
 }

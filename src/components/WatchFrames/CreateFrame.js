@@ -10,7 +10,7 @@ export function CreateFrame(name) {
    //console.log('create 0')
    switch (name) {
       case 'TIME':
-         frame = <ClockCanvas functionality="time" />;
+         frame = <ClockCanvas frame='time' />;
          break;
       // case('CALENDAR'):
       //    return _Frames('calendar');
@@ -19,7 +19,7 @@ export function CreateFrame(name) {
          // case(''):
          break;
       case 'STOPWATCH':
-         frame = <ClockCanvas functionality="stopwatch" />;
+         frame = <ClockCanvas frame='stopwatch' />;
          // case(''):
          break;
       case 'CALENDAR':
@@ -32,8 +32,8 @@ export function CreateFrame(name) {
    }
    
    return frame == null ? (<div/>) : (
-      <div className="frames">
-         <div className="frames__clock-frame">
+      <div className='frames'>
+         <div className='frames__clock-frame'>
             {frame}
          </div>
       </div>

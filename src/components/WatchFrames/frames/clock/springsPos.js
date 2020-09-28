@@ -1,7 +1,7 @@
-function watchKeyframes(sec, min, hour, adjmin=0, adjhour=0) {
-   // console.log('inside watchKeyFtrames', sec, min, hour, adjmin);
+import { connect } from 'react-redux';
 
-   return `
+
+const keyframes = (hour, min, sec, adjmin, adjhour) => `
    @keyframes movesechands {
       from {
          transform: rotate(${sec}deg);
@@ -25,23 +25,53 @@ function watchKeyframes(sec, min, hour, adjmin=0, adjhour=0) {
       to {
          transform: rotate(${hour + 360 + adjhour}deg);
       }
-   }`;
+   }
+`;
+
+const timeKeyframes = () => {
+   // to get actual date with adjastments for animation
+   const date = new Date();
+   const hour = date.getHours() * 30;
+   const min = date.getMinutes() * 6;
+   const sec = date.getSeconds() * 6;
+   const adjmin = sec / 60;
+   const adjhour = min / 12;
+
+   return keyframes(hour, min, sec, adjmin, adjhour);
 }
 
+const stopwatchKeyframes = (action, state=null) => {
+   const { hour, min, sec, adjmin, adjhour } = (state == null ? { hour = 0, min = 0, sec = 0, adjmin = 0, adjhour=0 } : state);
 
-export function springsPos(functionality) {
-   let date = new Date()
+   return keyframes(hour, min, sec, adjmin, adjhour);
+}
+
+// todo : hold time state in reducer
+
+function SpringsPos(props) {
+   const { state, action, functionality } = props;   
+
    switch (functionality) {
       case 'time':
-         let hour = date.getHours() * 30;
-         let min = date.getMinutes() * 6;
-         let sec = date.getSeconds() * 6;
-         let adjmin = sec / 60;
-         let adjhour = min / 12;
-         return watchKeyframes(sec, min, hour, adjmin, adjhour);
+         return timeKeyframes();
       case 'stopwatch':
-         return watchKeyframes(0, 0, 0);
+         return stopwatchKeyframes(state, action);
       default:
          return ``;
    }
 }
+
+
+const mapState = (props) => {
+   const { frameStatusReducer, frameReducer } = props;
+   return {
+      action: frameStatusReducer.action,
+      frame: frameReducer.currentFrame,
+   };
+}
+
+
+export default connect(
+   mapState,
+   null
+)(SpringsPos)

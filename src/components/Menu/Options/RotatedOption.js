@@ -1,19 +1,11 @@
-import React from 'react';
 import { connect } from 'react-redux';
+import React from 'react';
+
 import { changeFrameStatus } from 'redux/actions.js';
 
-class Bam extends React.Component {
-   constructor() {
-      this.state = 'some value'
-   }
-
-   bobo() {
-      this.setState('lolo')
-   }
-}
 
 function RotatedOption(props) {
-   let {
+   const {
       showFrame,
       innText,
       frame,
@@ -22,9 +14,9 @@ function RotatedOption(props) {
       changeFrameStatus,
       adjs,
    } = props;
-   let [rotatingClass, setRotatingClass] = React.useState('menu__option');
+   const [rotatingClass, setRotatingClass] = React.useState('menu__option');
 
-   let triggerFrame = (frame, cancel = false) => {
+   const triggerFrame = (frame, cancel = false) => {
       // check if something was in active state (rotated)
       if (rotated && !cancel) return alert('Cancel current element!');
       rotatingClass === 'menu__option' ? 
@@ -33,23 +25,20 @@ function RotatedOption(props) {
       return cancel ? showFrame('another') : showFrame(frame);
    };
 
-   let adjsMap;
-   if (!adjs) {
-      adjsMap = ('');
-   } else {
-      adjsMap = adjs.map((el) => (
-         <button
-            key={el.name}
-            className="menu__btn--back"
-            onClick={(e) => control(e, el.option)}
-         >
-            {el.name}
-         </button>
-      ));
-   } 
+   const adjsMap = !adjs ? '' :
+   adjs.map((el) => (
+      <button
+         key={el.name}
+         className="menu__btn--back"
+         onClick={(e) => control(e, el.option)}
+      >
+         {el.name}
+      </button>
+   ));
    
-   function control(e, type) {
+   const control = (e, type) => {
       e.preventDefault();
+      // here should be the time state
       return changeFrameStatus(type);
    };
 

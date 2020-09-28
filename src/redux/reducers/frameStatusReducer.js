@@ -1,5 +1,5 @@
 const initState = {
-   status: 'stop'
+   action: 'stop'
 }
 
 export function frameStatusReducer(state=initState, status) {
@@ -7,8 +7,8 @@ export function frameStatusReducer(state=initState, status) {
    if (!type) return state;
    
    let newState = Object.assign({}, state, {
-      status: type,
+      action: type,
    });
 
-   return newState
+   return newState;
 }

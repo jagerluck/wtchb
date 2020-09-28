@@ -32,6 +32,12 @@ module.exports = {
          },
       ],
    },
+   optimization: {
+      minimize: true,
+      minimizer: [
+
+      ]
+   },
    // resolve path to load modules
    resolve: {
       modules: ['src', 'node_modules'],
