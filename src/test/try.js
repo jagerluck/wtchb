@@ -37,3 +37,4 @@ let weakM = new WeakMap().set(st, 'lolo')
 console.log(weakM.get(st));
 
 console.log('lolo'.charAt(2));
+

@@ -10,11 +10,11 @@ export function CreateDelimeters(
 ) {
    const MemoizedDelimeters = React.useCallback(
       () => buildDelimeters(
-            angle,
-            amount_of_delimeters,
-            startX,
-            startY,
-            hypotenuse
+         angle,
+         amount_of_delimeters,
+         startX,
+         startY,
+         hypotenuse
          ),
       [angle, amount_of_delimeters]
    );

@@ -312,7 +312,7 @@
    background: rgb(255, 255, 255);
 }
 
-.clock-springs__hour-- {
+/* .clock-springs__hour-- {
    display: flex;
    transform-origin: bottom;
    justify-content: center;
@@ -343,7 +343,7 @@
    height: 140px;
    background: var(--sec-hand);
    animation: 60s linear movesechands infinite;
-}
+} */
 
 /***************CALENDAR****************/
 

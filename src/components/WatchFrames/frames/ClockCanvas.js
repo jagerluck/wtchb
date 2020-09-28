@@ -1,14 +1,14 @@
-import React from 'react'
+import { connect } from 'react-redux';
+import React from 'react';
 import { CreateDelimeters } from './clock/CreateDelimeters.js';
-import ClockSprings from './clock/ClockSprings.js'
-import { SpringsPos } from './clock/SpringsPos.js'
+import ClockSprings from './clock/ClockSprings.js';
+
 
 
 // watch ticks with help of css transform degrees
 function ClockCanvas(props) {   
    const delimeters = CreateDelimeters(2, 180, 165, 0, 165);
-   const { frame } = props; 
-   const springsPos = SpringsPos(frame);
+   const { frame } = props;
 
    return (
       <div className="scale-container" id="timenow">
@@ -19,9 +19,17 @@ function ClockCanvas(props) {
             <span className="clock-numbers__6">6</span>
             <span className="clock-numbers__9">9</span>
          </div>
-         <ClockSprings springsPos={springsPos} />
+         <ClockSprings frame={frame} />
       </div>
    );
 }
 
-export default ClockCanvas;
+const mapState = (props) => {
+   const { frameStatusReducer, frameReducer } = props;
+   return {
+      action: frameStatusReducer.action,
+      frame: frameReducer.currentFrame,
+   };
+};
+
+export default connect(mapState, null)(ClockCanvas);

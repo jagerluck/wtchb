@@ -1,6 +1,3 @@
-import { connect } from 'react-redux';
-
-
 const keyframes = (hour, min, sec, adjmin, adjhour) => `
    @keyframes movesechands {
       from {
@@ -36,22 +33,21 @@ const timeKeyframes = () => {
    const sec = date.getSeconds() * 6;
    const adjmin = sec / 60;
    const adjhour = min / 12;
-
    return keyframes(hour, min, sec, adjmin, adjhour);
 }
 
 const stopwatchKeyframes = (action, state=null) => {
-   const { hour, min, sec, adjmin, adjhour } = (state == null ? { hour = 0, min = 0, sec = 0, adjmin = 0, adjhour=0 } : state);
-
+   const { hour, min, sec, adjmin, adjhour } = state == null ? { hour:0, min:0, sec:0, adjmin:0, adjhour:0 } : state;
    return keyframes(hour, min, sec, adjmin, adjhour);
 }
 
 // todo : hold time state in reducer
 
-function SpringsPos(props) {
-   const { state, action, functionality } = props;   
+export const getSpringsPos = (props) => {
+   console.log(props);
+   const { state, action } = props;
 
-   switch (functionality) {
+   switch (action) {
       case 'time':
          return timeKeyframes();
       case 'stopwatch':
@@ -59,19 +55,4 @@ function SpringsPos(props) {
       default:
          return ``;
    }
-}
-
-
-const mapState = (props) => {
-   const { frameStatusReducer, frameReducer } = props;
-   return {
-      action: frameStatusReducer.action,
-      frame: frameReducer.currentFrame,
-   };
-}
-
-
-export default connect(
-   mapState,
-   null
-)(SpringsPos)
+};
