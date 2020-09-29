@@ -1,9 +1,8 @@
-import React from 'react'
-import { TIME, TIMER, STOPWATCH, CALENDAR } from 'redux/actions.js';
 import { connect } from 'react-redux';
-import { showFrame } from 'redux/actions.js';
-import RotatedOption from './Options/RotatedOption.js';
+import React from 'react'
 
+import RotatedOption from './Options/RotatedOption.js';
+import { TIME, TIMER, STOPWATCH, CALENDAR } from 'redux/actions.js';
 
 
 const options = [
@@ -14,13 +13,14 @@ const options = [
    {
       frame: STOPWATCH,
       innerText: 'Stopwatch',
-      adjs: [
+      // options according to animation-play-state
+      controls: [
          {
-            option: 'run',
+            option: 'running',
             name: 'Run',
          },
          {
-            option: 'pause',
+            option: 'paused',
             name: 'Pause',
          },
          {
@@ -32,7 +32,7 @@ const options = [
    {
       frame: TIMER,
       innerText: 'Timer',
-      adjs: [
+      controls: [
          {
             option: 'run',
             name: 'Run',
@@ -55,13 +55,12 @@ const options = [
 
 
 function WatchMenu(props) {
-   let { rotated, showFrame } = props
+   let { rotated } = props
 
    let optionsMap = options.map((el, i) => {
       return (
          <RotatedOption
             rotated={rotated}
-            showFrame={showFrame}
             key={i + 2000}
             frame={el.frame}
             innText={el.innerText}
@@ -72,7 +71,7 @@ function WatchMenu(props) {
                   ? ' bottom-border'
                   : ' intermediate'
             }
-            adjs={el.adjs ? el.adjs : ''}
+            controls={el.controls ? el.controls : ''}
          />
       );
    })
@@ -84,13 +83,13 @@ function WatchMenu(props) {
    )
 }
 
+
 function mapProps(state) {
    const { frameReducer } = state;
    return { rotated: frameReducer.rotated };
 }
 
-
 export default connect(
    mapProps,
-   { showFrame }
+   null
 )(WatchMenu)

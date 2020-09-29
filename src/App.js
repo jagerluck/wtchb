@@ -8,6 +8,7 @@ import CheckMounting from 'components/CheckMounting.js';
 
 
 function App(frameReducer) {
+   console.log(frameReducer)
    return (
       <div className="app-container" theme="dark">
          {/* display element from store */}

@@ -1,5 +1,5 @@
 import { CreateFrame } from 'components/WatchFrames/CreateFrame.js'
-import { TIME, CALENDAR, TIMER, STOPWATCH } from 'redux/actions.js'
+import { TIME, CALENDAR, TIMER, STOPWATCH, CANCEL } from 'redux/actions.js';
 
 
 
@@ -12,39 +12,34 @@ const initialState = {
 
 export function frameReducer(state = initialState, action) {
    let { type } = action
-   let newState;
-
    switch (type) {
       case TIME:
-         newState = Object.assign({}, state, {
+         return Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
             rotated: state.rotated ? false : true,
          });
-         break;
       case CALENDAR:
-         newState = Object.assign({}, state, {
+         return Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
             rotated: state.rotated ? false : true,
          });
-         break;
       case TIMER:
-         newState = Object.assign({}, state, {
+         return Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
             rotated: state.rotated ? false : true,
          });
-         break;
       case STOPWATCH:
-         newState = Object.assign({}, state, {
+         return Object.assign({}, state, {
             currentFrame: type,
             element: CreateFrame(type),
             rotated: state.rotated ? false : true,
          });
-         break;
+      case CANCEL: 
+         return Object.assign({}, initialState)
       default:
-         newState = Object.assign({}, initialState);
+         return state;
       }
-   return newState
 }

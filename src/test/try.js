@@ -29,12 +29,16 @@ let toBeRemoved = {
       mego: 'prop1'
    }
 }
-let st = ['some', 'something'];
-let weakM = new WeakMap().set(st, 'lolo')
+let weakM = new WeakMap().set({ some: 'some' }, 'lolo');
 
 // toBeRemoved = null
 
-console.log(weakM.get(st));
+console.log(weakM.get(some));
 
 console.log('lolo'.charAt(2));
 
+function gfo() {
+   return Object.assign({}, {name: {}})
+}
+
+console.log(gfo())
