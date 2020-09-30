@@ -68,8 +68,8 @@ function WatchMenu(props) {
                i === 0
                   ? ' top-border'
                   : i === options.length - 1
-                  ? ' bottom-border'
-                  : ' intermediate'
+                     ? ' bottom-border'
+                     : ' intermediate'
             }
             controls={el.controls ? el.controls : ''}
          />

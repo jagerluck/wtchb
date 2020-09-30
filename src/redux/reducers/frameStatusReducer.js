@@ -1,24 +1,39 @@
-const initState = {
-   action: 'paused'
-}
+import { PAUSED, RUNNING, RESET } from 'redux/actions.js';
 
-export function frameStatusReducer(state=initState, status) {
-   const { type } = status;
-   if (!type) return state;
+const initState = {
+   type: null,
+};
+
+export function frameStatusReducer(state=initState, action) {
+   const { type } = action;
    switch (type) {
-      case 'running':
-         return Object.assign({}, state, {
-            action: 'running',
-         });
-      case 'paused':
-         return Object.assign({}, state, {
-            action: 'paused',
-         });
-      case 'reset':
-         return Object.assign({}, state, {
-            action: 'reset',
-         });
+      case RUNNING:
+         return Object.assign(
+            {},
+            {
+               type: RUNNING,
+            }
+         );
+      case PAUSED:
+         return Object.assign(
+            {},
+            {
+               type: PAUSED,
+            }
+         );
+      case RESET:
+         return Object.assign(
+            {},
+            {
+               type: RESET,
+            }
+         );
       default:
-         return state;
+         return Object.assign(
+            {},
+            {
+               type: null,
+            }
+         );
    }
 }

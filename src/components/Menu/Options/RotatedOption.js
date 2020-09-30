@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { changeFrameStatus } from 'redux/actions.js';
-import { showFrame, CANCEL } from 'redux/actions.js';
+import { changeFrameStatus, showFrame, CANCEL } from 'redux/actions.js';
 
 
 const RotatedOption = (props) => {
@@ -11,20 +10,23 @@ const RotatedOption = (props) => {
       innText,
       frame,
       position,
-      rotated,
       changeFrameStatus,
       controls,
    } = props;
    const [rotatingClass, setRotatingClass] = React.useState('menu__option');
 
-   const toggleFrame = (frame, cancel = false) => { 
-      // check if something was in active state (rotated)
-      if (rotated && !cancel) return alert('Cancel current element!');
-      rotatingClass === 'menu__option' ? 
-         setRotatingClass('menu__option--rotated')
-         : setRotatingClass('menu__option');
-      return cancel ? showFrame(CANCEL) : showFrame(frame);
+   const toggleFrame = (e) => { 
+      rotatingClass === 'menu__option'
+      ? setRotatingClass('menu__option--rotated')
+      : setRotatingClass('menu__option');
+      e.target.innerText === CANCEL ? showFrame(CANCEL) : showFrame(frame);
    };
+   
+   const control = (e) => {
+      e.preventDefault();
+      const { playstate } = e.target.dataset;
+      changeFrameStatus(playstate);
+   } 
 
    const controlsMap = !controls
       ? ''
@@ -32,21 +34,21 @@ const RotatedOption = (props) => {
            <button
               key={el.name}
               className="menu__btn--back"
-              onClick={(e) => control(e, el.option)}
+              /* instead of calling function(some params) */
+              {...{ 'data-playstate': el.option }}
+              onClick={control}
            >
               {el.name}
            </button>
         ));
-   
-   const control = (e, type) => {
-      e.preventDefault();
-      changeFrameStatus(type);
-   };
 
    return (
       <div className={rotatingClass + position}>
          <div className="menu__option--front">
-            <button className="menu__btn" onClick={() => toggleFrame(frame)}>
+            <button
+               className="menu__btn"
+               onClick={toggleFrame}
+            >
                {innText}
             </button>
          </div>
@@ -56,9 +58,9 @@ const RotatedOption = (props) => {
             {controlsMap}
             <button
                className="menu__btn--back"
-               onClick={() => toggleFrame(frame, true)}
+               onClick={toggleFrame}
             >
-               Cancel
+               {CANCEL}
             </button>
          </div>
       </div>

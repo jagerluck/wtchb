@@ -28,17 +28,17 @@ export const getKeyframes = (hour, min, sec, adjmin, adjhour, keyframes) => ({
 });
 
 const timeKeyframes = (keyframes) => {
-   const date = new Date();
-   const hour = date.getHours() * 30;
-   const min = date.getMinutes() * 6;
-   const sec = date.getSeconds() * 6;
-   const adjmin = sec / 60;
-   const adjhour = min / 12;
+   const date = new Date(),
+         hour = date.getHours() * 30,
+         min = date.getMinutes() * 6,
+         sec = date.getSeconds() * 6,
+         adjmin = sec / 60,
+         adjhour = min / 12;
    return getKeyframes(hour, min, sec, adjmin, adjhour, keyframes);
 };
 
 export const stopwatchKeyframes = (keyframes) => {
-   return Object.assign({}, getKeyframes(0, 0, 0, 0, 0, keyframes));
+   return getKeyframes(0, 0, 0, 0, 0, keyframes);
 };
 
 export const getSpringsPos = (frame, keyframes) => {
@@ -48,7 +48,7 @@ export const getSpringsPos = (frame, keyframes) => {
       case STOPWATCH:
          return stopwatchKeyframes(keyframes);
       case 'reset':
-         return stopwatchKeyframes(keyframes);
+         
       default: 
       return ``;
    }

@@ -5,7 +5,7 @@ import ClockSprings from './clock/ClockSprings.js';
 
 
 // watch ticks with help of css transform degrees
-function ClockCanvas(props) {   
+function ClockCanvas(...props) {   
    const delimeters = CreateDelimeters(2, 180, 165, 0, 165);
 
    return (

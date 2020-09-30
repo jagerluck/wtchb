@@ -8,10 +8,8 @@ import CheckMounting from 'components/CheckMounting.js';
 
 
 function App(frameReducer) {
-   console.log(frameReducer)
    return (
       <div className="app-container" theme="dark">
-         {/* display element from store */}
          {frameReducer.element}
          <WatchMenu />
          <Router>
@@ -28,11 +26,12 @@ function App(frameReducer) {
    );
 }
 
-
 function mapStateToProps(state) {
    const { frameReducer } = state;
    return frameReducer;
 }
+
+
 
 
 export default connect(

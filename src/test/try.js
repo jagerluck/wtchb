@@ -24,21 +24,11 @@ let toCheckPermissions = new UserPermissions(54);
 // console.log(toCheckPermissions.getPermissions())
 
 
-let toBeRemoved = {
-   prop1: {
-      mego: 'prop1'
-   }
-}
-let weakM = new WeakMap().set({ some: 'some' }, 'lolo');
+const mapmap = new WeakMap();
+const ong = {};
+const onb = {};
 
-// toBeRemoved = null
-
-console.log(weakM.get(some));
-
-console.log('lolo'.charAt(2));
-
-function gfo() {
-   return Object.assign({}, {name: {}})
-}
-
-console.log(gfo())
+mapmap.set(ong, 'lololo')
+mapmap.set(onb, 'lololo')
+console.log(mapmap.delete(ong))
+console.log(mapmap.has(ong))

@@ -1,11 +1,14 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { getSpringsPos, stopwatchKeyframes } from './getSpringsPos.js';
+import { TIME, STOPWATCH, RUNNING, PAUSED, RESET } from 'redux/actions.js';
+
+import { getSpringsPos } from './getSpringsPos.js';
+
 
 
 const HourSpring = styled.div`
-   display: flex,
+   display: flex;
    transform-origin: bottom;
    justify-content: center;
    align-items: flex-end;
@@ -15,7 +18,7 @@ const HourSpring = styled.div`
    background: var(--hour-hand);
    box-shadow: 1px 2px 9px rgb(31, 31, 31);
    animation: 43200s linear ${(props) => props.movehourhands} infinite;
-   animation-play-state: ${(props) => props.action};
+   animation-play-state: ${(props) => props.playState};
 `;
    
 const MinuteSpring = styled.div`
@@ -28,7 +31,7 @@ const MinuteSpring = styled.div`
    border-radius: 4px;
    background: var(--minute-hand);
    animation: 3600s linear ${(props) => props.moveminhands} infinite;
-   animation-play-state: ${(props) => props.action};
+   animation-play-state: ${(props) => props.playState};
 `;
 
 const SecondSpring = styled.div`
@@ -37,45 +40,36 @@ const SecondSpring = styled.div`
    height: 140px;
    background: var(--sec-hand);
    animation: 60s linear ${(props) => props.movesechands} infinite;
-   animation-play-state: ${(props) => props.action};
+   animation-play-state: ${(props) => props.playState};
 `;
 
 
-const ClockSprings = (props) => {
-   let { frame, action } = props;
-   // how to add reset functionality...
-   const { movesechands, moveminhands, movehourhands } = stopwatchKeyframes(keyframes);
-   let springsMap = new WeakMap([
-   [
-         { hour: 'hour' },
-         <HourSpring movehourhands={movehourhands} action={action} />,
-      ],
-      [
-         { min: 'minutes' },
-         <MinuteSpring moveminhands={moveminhands} action={action} />,
-      ],
-      [
-         { sec: 'seconds' },
-         <SecondSpring movesechands={movesechands} action={action} />,
-      ],
-   ]);
 
-   React.useEffect(() => {
-      
-      <HourSpring movehourhands={movehourhands} action={action} />;
-   }, [action])
+const ClockSprings = (props) => {
+   let { frame, playState } = props;
+   console.log(props)
+   const { movesechands, moveminhands, movehourhands } = getSpringsPos(frame, keyframes);
 
    return (
       <div className="clock-springs">
          <div className="clock-springs__central"></div>
          <div className="clock-springs__hour">
-            <HourSpring movehourhands={movehourhands} action={action} />
+            <HourSpring
+               movehourhands={movehourhands}
+               playState={playState}
+            />
          </div>
          <div className="clock-springs__minute">
-            <MinuteSpring moveminhands={moveminhands} action={action} />
+            <MinuteSpring
+               moveminhands={moveminhands}
+               playState={playState}
+            />
          </div>
          <div className="clock-springs__second">
-            <SecondSpring movesechands={movesechands} action={action} />
+            <SecondSpring
+               movesechands={movesechands}
+               playState={playState}
+            />
          </div>
       </div>
    );
@@ -84,9 +78,14 @@ const ClockSprings = (props) => {
 
 const mapState = (props) => {
    const { frameStatusReducer, frameReducer } = props;
+
    return {
       frame: frameReducer.currentFrame,
-      action: frameStatusReducer.action,
+      playState: (frameStatusReducer.type == null) ?
+         frameReducer.currentFrame === TIME
+            ? (frameStatusReducer.type = RUNNING)
+            : (frameStatusReducer.type = PAUSED)
+         : frameStatusReducer.type,
    };
 };
 
