@@ -25,6 +25,7 @@ const RotatedOption = (props) => {
    const control = (e) => {
       e.preventDefault();
       const { playstate } = e.target.dataset;
+      console.log(playstate)
       changeFrameStatus(playstate);
    } 
 

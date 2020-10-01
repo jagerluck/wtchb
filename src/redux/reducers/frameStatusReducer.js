@@ -6,6 +6,7 @@ const initState = {
 
 export function frameStatusReducer(state=initState, action) {
    const { type } = action;
+   console.log(type)
    switch (type) {
       case RUNNING:
          return Object.assign(

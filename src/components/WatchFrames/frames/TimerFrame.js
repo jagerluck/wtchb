@@ -1,11 +1,14 @@
-import Timer from 'react-compound-timer';
-import React from 'react';
+import { CANCEL, RUNNING, PAUSED, RESET } from 'redux/actions.js';
 import { connect } from 'react-redux';
+import React from 'react';
+
+import Timer from 'react-compound-timer';
 
 
 
 function TimerFrame(props) {
-   let { status } = props;
+   const { status } = props;
+   console.log(props, status)
 
    return (
       <Timer
@@ -14,13 +17,14 @@ function TimerFrame(props) {
       >
          {({ start, stop, resume, reset, pause, timerState }) => {
             switch (status) {
-               case 'run':
+               case RUNNING:
+                  console.log('before start')
                   start();
                   break;
-               case 'reset':
+               case RESET:
                   reset();
                   break;
-               case 'pause':
+               case PAUSED:
                   pause();
                   break;
                default:
@@ -39,13 +43,10 @@ function TimerFrame(props) {
 }
 
 
-function showFrameStatus(props) {
+function mapState(props) {
    const { frameStatusReducer } = props;
-   return {status: frameStatusReducer.status};
+   return {status: frameStatusReducer.type};
 }
 
 
-export default connect(
-   showFrameStatus,
-   null
-)(TimerFrame)
+export default connect(mapState, null)(TimerFrame);

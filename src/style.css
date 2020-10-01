@@ -9,6 +9,7 @@
    --clock-w-h-inner: 330px;
    --calendar-w-h: 400px;
    --main-color: #102323;
+   --textcolor-menu: whitesmoke;
 }
 
 * {
@@ -138,7 +139,7 @@
    min-width: 390px;
    margin: 0.3rem 0;
    height: 3rem;
-   color: aliceblue;
+   color: var(--textcolor-menu);
    position: relative;
    vertical-align: middle;
    transform-origin: center;
@@ -199,7 +200,7 @@
    display: block;
    height: 100%;
    border-top: 1px solid rgb(48, 48, 48);
-   color: whitesmoke;
+   color: var(--textcolor-menu);
    background: linear-gradient(rgb(29, 38, 39) 1%, var(--main-color) 99%);
    margin: auto;
    width: 100%;
@@ -211,7 +212,7 @@
    display: block;
    height: 100%;
    border-top: 1px solid rgb(48, 48, 48);
-   color: whitesmoke;
+   color: var(--textcolor-menu);
    background: linear-gradient(rgb(29, 38, 39) 1%, var(--main-color) 99%);
    margin: auto;
 }
@@ -312,43 +313,9 @@
    background: rgb(255, 255, 255);
 }
 
-/* .clock-springs__hour-- {
-   display: flex;
-   transform-origin: bottom;
-   justify-content: center;
-   align-items: flex-end;
-   width: 8px;
-   height: 80px;
-   border-radius: 6px;
-   background: var(--hour-hand);
-   box-shadow: 1px 2px 9px rgb(31, 31, 31);
-   animation: 43200s linear movehourhands infinite;
-}
-
-.clock-springs__minute-- {
-   display: flex;
-   transform-origin: bottom;
-   justify-content: center;
-   align-items: flex-end;
-   width: 4px;
-   height: 110px;
-   border-radius: 4px;
-   background: var(--minute-hand);
-   animation: 3600s linear moveminhands infinite;
-}
-
-.clock-springs__second-- {
-   width: 1px;
-   transform-origin: bottom;
-   height: 140px;
-   background: var(--sec-hand);
-   animation: 60s linear movesechands infinite;
-} */
-
 /***************CALENDAR****************/
 
 .calendar-frame {
-   margin: 1rem;
    display: flex;
    position: absolute;
    flex-flow: row wrap;
@@ -358,7 +325,7 @@
    width: var(--clock-w-h);
    height: var(--clock-w-h);
    border: 4px solid #102020;
-   color: beige;
+   color: var(--textcolor-menu);
    box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
       inset 0 -15px 15px rgba(255, 255, 255, 0.05),
       0 15px 15px rgba(0, 0, 0, 0.3), inset 0 15px 15px rgba(0, 0, 0, 0.3);
@@ -369,70 +336,226 @@
    display: flex;
 }
 
-.calendar-frame li {
-   all: unset;
+.DayPicker {
+   font-size: 1rem;
+   border-radius: 5rem;
 }
 
-.calendar__title-field {
-   flex: 1 0 100%;
+
+.DayPicker-wrapper {
+   position: relative;
+   height: 250px;
+   border-radius: 5rem;
+   flex-direction: row;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.DayPicker-Months {
    display: flex;
+   flex-wrap: wrap;
    justify-content: center;
-   flex-flow: row nowrap;
-   padding-top: 2rem;
-   height: 2.5rem;
-   line-height: 2.5rem;
+   line-height: 0.9rem;
+   border-radius: 5rem;
 }
 
-/* Arrows, half past 0 and I realized that it needs to be js to be able to click that shit... */
-.calendar__title-field::before {
-   background-image: url('./pics/arrow.svg');
-   background-size: contain;
-   background-repeat: no-repeat;
-   padding: 1.5rem 0.75rem 0.25rem 0.75rem;
-   margin: 0.5rem 1rem;
-   color: aliceblue;
-   filter: brightness(2);
-   transform: scale(1.5);
-   content: '';
-   cursor: pointer;
+.DayPicker-Month {
+   display: table;
+   margin: 0 1em;
+   margin-top: 1em;
+   border-spacing: 0;
+   border-collapse: collapse;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
 }
-.calendar__title-field::after {
-   background-image: url('./pics/arrow.svg');
-   background-size: contain;
+
+.DayPicker-NavButton {
+   position: absolute;
+   top: 1em;
+   right: 1.5em;
+   left: auto;
+
+   display: inline-block;
+   margin-top: 2px;
+   width: 1.25em;
+   height: 1.25em;
+   background-position: center;
+   background-size: 50%;
    background-repeat: no-repeat;
-   transform: scale(1.5) rotate(180deg);
-   filter: brightness(2);
-   padding: 1.5rem 0.75rem 0.25rem 0.75rem;
-   margin: 0.5rem 1rem;
-   content: '';
+   color: #8b9898;
    cursor: pointer;
 }
 
-.calendar__date-field {
-   height: 200px;
+.DayPicker-NavButton:hover {
+   opacity: 0.8;
+}
+
+.DayPicker-NavButton--prev {
+   margin-right: 1.5em;
+   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAwCAYAAAB5R9gVAAAABGdBTUEAALGPC/xhBQAAAVVJREFUWAnN2G0KgjAYwPHpGfRkaZeqvgQaK+hY3SUHrk1YzNLay/OiEFp92I+/Mp2F2Mh2lLISWnflFjzH263RQjzMZ19wgs73ez0o1WmtW+dgA01VxrE3p6l2GLsnBy1VYQOtVSEH/atCCgqpQgKKqYIOiq2CBkqtggLKqQIKgqgCBjpJ2Y5CdJ+zrT9A7HHSTA1dxUdHgzCqJIEwq0SDsKsEg6iqBIEoq/wEcVRZBXFV+QJxV5mBtlDFB5VjYTaGZ2sf4R9PM7U9ZU+lLuaetPP/5Die3ToO1+u+MKtHs06qODB2zBnI/jBd4MPQm1VkY79Tb18gB+C62FdBFsZR6yeIo1YQiLJWMIiqVjQIu1YSCLNWFgijVjYIuhYYCKoWKAiiFgoopxYaKLUWOii2FgkophYp6F3r42W5A9s9OcgNvva8xQaysKXlFytoqdYmQH6tF3toSUo0INq9AAAAAElFTkSuQmCC');
+}
+
+.DayPicker-NavButton--next {
+   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAwCAYAAAB5R9gVAAAABGdBTUEAALGPC/xhBQAAAXRJREFUWAnN119ugjAcwPHWzJ1gnmxzB/BBE0n24m4xfNkTaOL7wOtsl3AXMMb+Vjaa1BG00N8fSEibPpAP3xAKKs2yjzTPH9RAjhEo9WzPr/Vm8zgE0+gXATAxxuxtqeJ9t5tIwv5AtQAApsfT6TPdbp+kUBcgVwvO51KqVhMkXKsVJFXrOkigVhCIs1Y4iKlWZxB1rX4gwlpRIIpa8SDkWmggrFq4IIRaJKCYWnSgnrXIQV1r8YD+1Vrn+bReagysIFfLABRt31v8oBu1xEBttfRbltmfjgEcWh9snUS2kNdBK6WN1vrOWxObWsz+fjxevsxmB1GQDfINWiev83nhaoiB/CoOU438oPrhXS0WpQ9xc1ZQWxWHqUYe0I0qrKCQKjygDlXIQV2r0IF6ViEBxVTBBSFUQQNhVYkHIVeJAtkNsbQ7c1LtzP6FsObhb2rCKv7NBIGoq4SDmKoEgTirXAcJVGkFSVVpgoSrXICGUMUH/QBZNSUy5XWUhwAAAABJRU5ErkJggg==');
+}
+
+.DayPicker-NavButton--interactionDisabled {
+   display: none;
+}
+
+.DayPicker-Caption {
+   display: table-caption;
+   margin-bottom: 0.5em;
+   padding: 0 0.5em;
+   text-align: left;
+}
+
+.DayPicker-Caption > div {
+   font-weight: 500;
+   font-size: 1.15em;
+}
+
+.DayPicker-Weekdays {
+   display: table-header-group;
+   margin-top: 1em;
+}
+
+.DayPicker-WeekdaysRow {
+   display: table-row;
+}
+
+.DayPicker-Weekday {
+   display: table-cell;
+   padding: 0.5em;
+   color: #8b9898;
    text-align: center;
+   font-size: 0.875em;
 }
 
-.calendar__date-field .weekdays {
-   width: 350px;
-   display: flex;
-   flex-flow: row nowrap;
+.DayPicker-Weekday abbr[title] {
+   border-bottom: none;
+   text-decoration: none;
 }
 
-.calendar__date-field .weekdays li {
-   flex: 1 1 50px;
-   margin: 0.2rem;
+.DayPicker-Body {
+   display: table-row-group;
 }
 
-.calendar__date-field .days {
-   display: flex;
-   width: 350px;
-   flex-flow: row wrap;
+.DayPicker-Week {
+   display: table-row;
 }
 
-.calendar__date-field .days li {
-   flex: 0 0 50px;
-   margin: 0.2rem 0;
+.DayPicker-Day {
+   display: table-cell;
+   padding: 0.5em;
+   border-radius: 50%;
+   vertical-align: middle;
+   text-align: center;
+   cursor: pointer;
+}
+
+.DayPicker-WeekNumber {
+   display: table-cell;
+   padding: 0.5em;
+   min-width: 1em;
+   border-right: 1px solid #eaecec;
+   color: #8b9898;
+   vertical-align: middle;
+   text-align: right;
+   font-size: 0.75em;
+   cursor: pointer;
+}
+
+.DayPicker--interactionDisabled .DayPicker-Day {
+   cursor: default;
+}
+
+.DayPicker-Footer {
+   text-align: center;
+   width: 100%;
+   position: absolute;
+   bottom: 0;
+}
+
+.DayPicker-TodayButton {
+   border: none;
+   color: red;
+   font-size: 1rem;
+   cursor: pointer;
+}
+
+/* Default modifiers */
+
+.DayPicker-Day--today {
+   color: #d0021b;
+   font-weight: 700;
+}
+
+.DayPicker-Day--outside {
+   color: #8b9898;
+   cursor: default;
+}
+
+.DayPicker-Day--disabled {
+   color: #dce0e0;
+   cursor: default;
+   /* background-color: #eff1f1; */
+}
+
+/* Example modifiers */
+
+.DayPicker-Day--sunday {
+   background-color: #f7f8f8;
+}
+
+.DayPicker-Day--sunday:not(.DayPicker-Day--today) {
+   color: #dce0e0;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+   position: relative;
+
+   background-color: #4a90e2;
+   color: #f0f8ff;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside):hover {
+   background-color: #51a0fa;
+}
+
+.DayPicker:not(.DayPicker--interactionDisabled)
+   .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+   background-color: #f0f8ff;
+}
+
+/* DayPickerInput */
+
+.DayPickerInput {
+   display: inline-block;
+   max-height: 90%;
+   overflow: hidden;
+}
+
+.DayPickerInput input {
+   all: unset;
+   text-align: center;
+   color: var(--textcolor-menu);
+   line-height: 1.6rem;
+   font-size: 1.2rem;
+   height: 1.8rem;
+   width: 100%;
+}
+
+.DayPickerInput-OverlayWrapper {
+   position: relative;
+}
+
+.DayPickerInput-Overlay {
+   z-index: 1;
 }
 
 /* ***************** ANIMATIONS ***************** */

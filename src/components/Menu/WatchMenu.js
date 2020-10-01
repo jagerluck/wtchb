@@ -34,11 +34,11 @@ const options = [
       innerText: 'Timer',
       controls: [
          {
-            option: 'run',
+            option: 'running',
             name: 'Run',
          },
          {
-            option: 'pause',
+            option: 'paused',
             name: 'Pause',
          },
          {

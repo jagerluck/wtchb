@@ -3,12 +3,13 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { TIME, STOPWATCH, RUNNING, PAUSED, RESET } from 'redux/actions.js';
 
-import { getSpringsPos } from './getSpringsPos.js';
+import { SpringsKeyframes } from './SpringsKeyframes.js';
 
 
 
 const HourSpring = styled.div`
    display: flex;
+   transform: rotate(${(props) => props.hour + props.adjhour}deg);
    transform-origin: bottom;
    justify-content: center;
    align-items: flex-end;
@@ -17,12 +18,14 @@ const HourSpring = styled.div`
    border-radius: 6px;
    background: var(--hour-hand);
    box-shadow: 1px 2px 9px rgb(31, 31, 31);
+   transform: rotate();
    animation: 43200s linear ${(props) => props.movehourhands} infinite;
    animation-play-state: ${(props) => props.playState};
 `;
-   
+
 const MinuteSpring = styled.div`
    display: flex;
+   transform: rotate(${(props) => props.min + props.adjmin}deg);
    transform-origin: bottom;
    justify-content: center;
    align-items: flex-end;
@@ -36,6 +39,7 @@ const MinuteSpring = styled.div`
 
 const SecondSpring = styled.div`
    width: 1px;
+   transform: rotate(${(props) => props.sec}deg);
    transform-origin: bottom;
    height: 140px;
    background: var(--sec-hand);
@@ -47,28 +51,41 @@ const SecondSpring = styled.div`
 
 const ClockSprings = (props) => {
    let { frame, playState } = props;
-   console.log(props)
-   const { movesechands, moveminhands, movehourhands } = getSpringsPos(frame, keyframes);
+   const {
+      movesechands,
+      moveminhands,
+      movehourhands,
+      hour,
+      min,
+      sec,
+      adjmin,
+      adjhour,
+   } = playState === RESET ? SpringsKeyframes(RESET) : SpringsKeyframes(frame);
 
    return (
       <div className="clock-springs">
          <div className="clock-springs__central"></div>
          <div className="clock-springs__hour">
             <HourSpring
-               movehourhands={movehourhands}
                playState={playState}
+               movehourhands={movehourhands}
+               hour={hour}
+               adjhour={adjhour}
             />
          </div>
          <div className="clock-springs__minute">
             <MinuteSpring
-               moveminhands={moveminhands}
                playState={playState}
+               moveminhands={moveminhands}
+               min={min}
+               adjmin={adjmin}
             />
          </div>
          <div className="clock-springs__second">
             <SecondSpring
-               movesechands={movesechands}
                playState={playState}
+               movesechands={movesechands}
+               sec={sec}
             />
          </div>
       </div>
