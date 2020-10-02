@@ -519,13 +519,16 @@
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
    position: relative;
 
-   background-color: #4a90e2;
+   background-color: #4894ea;
    color: #f0f8ff;
 }
 
+/*  onhover the choosen date 
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside):hover {
-   background-color: #51a0fa;
+   background-color: #86b6ec;
+   color: rgb(255, 245, 245);
 }
+*/
 
 .DayPicker:not(.DayPicker--interactionDisabled)
    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
