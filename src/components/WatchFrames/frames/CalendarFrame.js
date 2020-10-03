@@ -1,44 +1,88 @@
+import React, {useRef, useState, useEffect} from 'react';
 import DayPicker from 'react-day-picker';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import React from 'react';
 // import AddTodo from 'calendar/'
 // import './calendar/style.css';
 
 
 
+const birthdayStyle = `.DayPicker-Day--highlighted {
+  background-color: orange;
+  color: white;
+}`;
+
+
 
 export function CalendarFrame(props) {
-   const [selectedDay, setSelectedDay] = React.useState(null);
+   const [selectedDays, setSelectedDays] = useState([new Date(2020, 9, 30), new Date(2020, 9, 11)]);
+   const [clickedDay, setClickedDay] = useState(null);
+   const calendarDiv = useRef(null);
+
+   // add listeners to parent node so it could close active selections
+   useEffect(() => {
+      calendarDiv.addEventListener('blur', () => {
+         if (clickedDay == null) return; 
+         clickedDay.classList.toggle('.calendar-task-prompting');
+         setClickedDay(null);
+      }, true);
+   }, []);
+
+   const provDateOptions = () => {
+
+
+      return (
+         <div className="calendar-popup__container">
+            <div className="calendar-popup__"></div>
+         </div>
+      )
+   }
+   
+   const askForChanges = (e) => {
+      setClickedDay(e.target);
+      clickedDay.classList.toggle('--ask');
+   }
    
    const handleDayClick = (day, selected, dayPickerInput) => {
       const d = new Date(day);
    }
    const regex = /--selected/; 
 
-   const showMeThePop = (e) => {
-      regex.test(e.target.className) ? console.log('founded selected element') : console.log('just regular one')
-      // easiest way to just listen to event and then if class selected fire a popup. but feels a bit clumsy 
-   }
+   /*
+   steps to enable popup msg: 
+   - create element in react at first render and hide it ititially;
+   - set y and x coordinates + unhide property to this element;
+   - keep element visible while there weren't clicked ESC or places outside the element. First idea is to also create the div with 100% width and 100% height and just listen to it's clicks and then do what was needed or listen to ESC key;
+   */
 
-   const descriptors = Object.getOwnPropertyDescriptors(DayPickerInput);
-   descriptors.prototype.value.hideDayPicker = function() { return; };
 
-   const newDate1 = new Date(2020, 9, 30);
-   const newDate2 = new Date(2020, 9, 31);
+   // workaround to hide daypicker window
+   // const descriptors = Object.getOwnPropertyDescriptors(DayPickerInput);
+   // descriptors.prototype.value.hideDayPicker = function() { return; };
+   
+   const processDatePicks = (date, locale, e) => {
+      askForChanges(e);
 
+      if (selectedDays.containsDate(date)) return setSelectedDays(selectedDays.filter((d) => d.getTime() !== date.getTime()));
+      setSelectedDays(selectedDays.concat(date));
+   };
+
+
+
+   
    return (
-      <div className="calendar-frame">
-         <DayPickerInput
-            showOverlay={true}
-            hideOnDayClick={false}
-            dayPickerProps={{
-               todayButton: 'Today',
-               selectedDays: [newDate1, newDate2],
-            }}
-            keepFocus={false}
-            onMouseOver={showMeThePop}
-            onDayChange={handleDayClick}
+      <div className="calendar-frame" ref={calendarDiv}>
+         <DayPicker
+            onDayClick={processDatePicks}
+            selectedDays={selectedDays}
+            todayButton="Today"
          />
       </div>
    );
 }
+
+
+
+/* 
+1) click
+2) use element from state and set it's top/left props according to clicked element;
+3) destructure element if something else was clicked (either outside this element or it's controlling buttons like 'close' or 'confirm' etc.)
+*/
