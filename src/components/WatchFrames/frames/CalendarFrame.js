@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import DayPicker from 'react-day-picker';
+import { CalendarPopup } from 'components/WatchFrames/frames/calendar/CalendarPopup.js';
 // import AddTodo from 'calendar/'
 // import './calendar/style.css';
 
@@ -15,25 +16,21 @@ const birthdayStyle = `.DayPicker-Day--highlighted {
 export function CalendarFrame(props) {
    const [selectedDays, setSelectedDays] = useState([new Date(2020, 9, 30), new Date(2020, 9, 11)]);
    const [clickedDay, setClickedDay] = useState(null);
+   const [hidePopup, setHidePopup] = useState(false);
    const calendarDiv = useRef(null);
 
    // add listeners to parent node so it could close active selections
-   useEffect(() => {
-      calendarDiv.addEventListener('blur', () => {
-         if (clickedDay == null) return; 
-         clickedDay.classList.toggle('.calendar-task-prompting');
-         setClickedDay(null);
-      }, true);
-   }, []);
+   // useEffect(() => {
+   //    calendarDiv.addEventListener('blur', () => {
+   //       if (clickedDay == null) return; 
+   //       clickedDay.classList.toggle('.calendar-task-prompting');
+   //       setClickedDay(null);
+   //    }, true);
+   // }, []);
 
    const provDateOptions = () => {
 
-
-      return (
-         <div className="calendar-popup__container">
-            <div className="calendar-popup__"></div>
-         </div>
-      )
+      return /* add html tags afterwards */;
    }
    
    const askForChanges = (e) => {
@@ -73,8 +70,9 @@ export function CalendarFrame(props) {
          <DayPicker
             onDayClick={processDatePicks}
             selectedDays={selectedDays}
-            todayButton="Today"
+            todayButton="Current Month"
          />
+         <CalendarPopup hide={hidePopup} date={new Date(Date.now())}/>
       </div>
    );
 }

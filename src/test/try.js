@@ -24,11 +24,12 @@ let toCheckPermissions = new UserPermissions(54);
 // console.log(toCheckPermissions.getPermissions())
 
 
-const mapmap = new WeakMap();
-const ong = {};
-const onb = {};
 
-mapmap.set(ong, 'lololo')
-mapmap.set(onb, 'lololo')
-console.log(mapmap.delete(ong))
-console.log(mapmap.has(ong))
+const brou = () => ({bro: { first: 1, second: 2, third: 3 }});
+const res = brou();
+
+const some = ({ bro: { first }}) => {
+   return first;
+}
+
+console.log(some(res));

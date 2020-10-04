@@ -12,10 +12,12 @@ const RotatedOption = (props) => {
       position,
       changeFrameStatus,
       controls,
+      currentFrame,
    } = props;
    const [rotatingClass, setRotatingClass] = React.useState('menu__option');
 
-   const toggleFrame = (e) => { 
+   const toggleFrame = (e) => {
+      if (currentFrame && currentFrame !== frame) return alert('Cancel frame first!'); 
       rotatingClass === 'menu__option'
       ? setRotatingClass('menu__option--rotated')
       : setRotatingClass('menu__option');
@@ -68,9 +70,9 @@ const RotatedOption = (props) => {
    );
 }
 
-
+const mapState = ({frameReducer: {currentFrame }}) => ({currentFrame})
 
 export default connect(
-   null, 
+   mapState, 
    { changeFrameStatus, showFrame }
 )(RotatedOption);

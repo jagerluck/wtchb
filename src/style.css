@@ -10,11 +10,10 @@
    --calendar-w-h: 400px;
    --main-color: #102323;
    --textcolor-menu: whitesmoke;
+   --calendar-choosendate-color: rgb(180, 132, 214);
 }
 
-* {
-   margin: 0;
-   padding: 0;
+body {
    background-color: var(--main-color);
 }
 
@@ -336,6 +335,79 @@
    display: flex;
 }
 
+.calendar-popup__container {
+   position: absolute;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0);
+}
+
+.calendar-popup__container--hide {
+   position: absolute;
+   bottom: 0;
+   transform: scaleY(0);
+   transition: scaleY .25s linear;
+}
+
+.calendar-popup {
+   position: relative;
+   display: flex;
+   width: 70%;
+   flex-flow: row wrap;
+   justify-content: center;
+   justify-items: center;
+   z-index: 2;
+   background-color: #202c2a;
+   border-radius: 1rem;
+}
+/* 
+.calendar-popup__tail {
+   position: absolute;
+   bottom: 0;
+   width: 3rem;
+   height: 3rem;
+   background-color: #202c2a;
+   transform-origin: center;
+   transform: rotate(45deg);
+} */
+
+.calendar-popup__tail {
+   position: absolute;
+   bottom: 0;
+   margin: 0 0 -4rem 0;
+   border: 2rem solid rgba(0,0,0,0);
+   border-top: 2rem solid #202c2a;
+   transform-origin: center;
+}
+
+.calendar-popup__close {
+   position: absolute;
+   right: 0;
+   margin: .2rem;
+}
+
+.calendar-popup__close:hover,
+.calendar-popup__close:active {
+   cursor: pointer;
+   filter: invert(.95);
+   transform: sclale(1.05);
+}
+
+.calendar-popup__prompts__title {
+   margin: .5rem 1rem;
+}
+
+.calendar-popup__prompts {
+
+}
+
+.calendar-popup__button {
+
+}
+
+.calendar-popup__button {
+
+}
+
 .DayPicker {
    font-size: 1rem;
    border-radius: 5rem;
@@ -482,10 +554,16 @@
 }
 
 .DayPicker-TodayButton {
-   border: none;
-   color: red;
-   font-size: 1rem;
+   all: unset;
+   color: var(--calendar-choosendate-color);
+   font-size: 1.05rem;
    cursor: pointer;
+}
+
+.DayPicker-TodayButton:hover {
+   text-decoration: underline;
+   filter: invert(.8);
+   transition: all .25s linear;
 }
 
 /* Default modifiers */
@@ -518,8 +596,7 @@
 
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
    position: relative;
-
-   background-color: #4894ea;
+   background-color: var(--calendar-choosendate-color);
    color: #f0f8ff;
 }
 

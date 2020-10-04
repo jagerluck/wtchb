@@ -59,20 +59,22 @@ function WatchMenu(props) {
 
    let optionsMap = options.map((el, i) => {
       return (
-         <RotatedOption
-            rotated={rotated}
-            key={i + 2000}
-            frame={el.frame}
-            innText={el.innerText}
-            position={
-               i === 0
-                  ? ' top-border'
-                  : i === options.length - 1
+         <>
+            <RotatedOption
+               rotated={rotated}
+               key={i + 2000}
+               frame={el.frame}
+               innText={el.innerText}
+               position={
+                  i === 0
+                     ? ' top-border'
+                     : i === options.length - 1
                      ? ' bottom-border'
                      : ' intermediate'
-            }
-            controls={el.controls ? el.controls : ''}
-         />
+               }
+               controls={el.controls ? el.controls : ''}
+            />
+         </>
       );
    })
 

@@ -7,11 +7,11 @@ export function CreateFrame(name) {
    const frame = (name) => {
       switch (name) {
          case 'TIME':
-            return <ClockCanvas frame="time" />;
+            return <div className="frames__clock-frame"><ClockCanvas frame="time" /></div>;
          case 'TIMER':
-            return <TimerFrame />;
+            return <div className="frames__clock-frame"><TimerFrame /></div>;
          case 'STOPWATCH':
-            return <ClockCanvas frame="stopwatch" />;
+            return <div className="frames__clock-frame"><ClockCanvas frame="stopwatch" /></div>;
          case 'CALENDAR':
             return <CalendarFrame />;
          default:
@@ -23,7 +23,7 @@ export function CreateFrame(name) {
       <div />
    ) : (
       <div className="frames">
-         <div className="frames__clock-frame">{frame(name)}</div>
+         {frame(name)}
       </div>
    );
 }

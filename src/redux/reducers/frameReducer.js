@@ -3,7 +3,7 @@ import { TIME, CALENDAR, TIMER, STOPWATCH, CANCEL } from 'redux/actions.js';
 
 
 const initialState = {
-   currentFrame: '',
+   currentFrame: null,
    element: '',
    rotated: false,
 };
