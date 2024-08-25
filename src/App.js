@@ -5,8 +5,6 @@ import React from 'react'
 import 'style.css'
 import WatchMenu from 'components/Menu/WatchMenu.js';
 import CheckMounting from 'components/CheckMounting.js';
-
-
 function App(frameReducer) {
    return (
       <div className="app-container" theme="dark">
